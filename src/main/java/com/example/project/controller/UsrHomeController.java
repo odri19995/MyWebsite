@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.project.vo.KakaoProfile;
+import com.example.project.vo.OAuthToken;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Controller
 public class UsrHomeController {
 //	http://localhost:8081/usr/home/main
@@ -47,9 +52,60 @@ public class UsrHomeController {
 				HttpMethod.POST,
 				kakaoTokenRequest,
 				String.class				
-				);
+		);
 		
-		return "kakao 토큰 요청 완료  :" + response.getBody();
+		// GSon, Json Simple, ObjectMapper();
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		OAuthToken oauthToken = null;
+		
+		try {
+			oauthToken = objectMapper.readValue(response.getBody(),OAuthToken.class);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("카카오 엑세스 토큰 : " + oauthToken.getAccess_token());
+		
+		RestTemplate rt2 = new RestTemplate();
+		
+		
+		// HttpHeader 오브젝트 생성
+		HttpHeaders headers2 = new HttpHeaders();
+		headers2.add("Authorization", "Bearer "+oauthToken.getAccess_token());
+		headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+				
+		//HttpHeader와 HttpBody를 하나의 오브젝트에 담기
+		HttpEntity<MultiValueMap<String,String>> kakaoProfileRequest =
+			new HttpEntity<>(headers2);
+		
+		// Http 요청하기 - post방식으로 -그리고 response변수의 응답을 받음
+		ResponseEntity<String> response2 = rt2.exchange(
+				"https://kapi.kakao.com/v2/user/me",
+				HttpMethod.POST,
+				kakaoProfileRequest,
+				String.class				
+		);
+		System.out.println(response2.getBody());
+		
+		ObjectMapper objectMapper2 = new ObjectMapper();
+		KakaoProfile kakaoProfile = null;
+		
+		try {
+			kakaoProfile = objectMapper2.readValue(response2.getBody(),KakaoProfile.class);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("카카오 아이디 번호 : " +kakaoProfile.getId());
+		System.out.println("카카오 사용자 : " +kakaoProfile.getProperties().getNickname());
+
+		
+
+		
+		return "kakao 토큰 요청 완료  :" + response2.getBody();
 	}
 	
 	
