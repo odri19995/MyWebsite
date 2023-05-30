@@ -14,6 +14,8 @@
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 <link rel="stylesheet" href="/css/loginForm.css" />
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+  integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx" crossorigin="anonymous"></script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,13 +25,13 @@
  
 </head>
 <body>
-    <form action="<c:url value='/login/login'/>" method="post" onsubmit="return formCheck(this);">
+    <form action="<c:url value="/usr/login"/>" method="post" onsubmit="return formCheck(this);">
         <h3 id="title">Login</h3>
         <div id="msg">
 	    <c:if test="${not empty param.msg}">
 		<i class="fa fa-exclamation-circle"> ${URLDecoder.decode(param.msg)}</i>            
 	    </c:if>        
-	</div>
+		</div>
         <input type="text" name="id" value ="${cookie.id.value}" placeholder="이메일 입력" autofocus value = "">
         <input type="password" name="pwd" placeholder="비밀번호">
         <button>로그인</button>
@@ -38,7 +40,31 @@
             <a href="">비밀번호 찾기</a> |
             <a href="">회원가입</a>
         </div>
-<%@ include file="../kakao/kakao.jsp" %>
+
+		<script>
+			function GetkakaoKey(){
+				$.get('../usr/kakao/kakaokey', {
+					
+				}, function(data){
+		 			Kakao.init(data);
+		 			console.log(Kakao.isInitialized());
+				}, 'text')
+			}
+			
+			GetkakaoKey();
+			
+			function loginWithKakao() {
+				    Kakao.Auth.authorize({
+				      redirectUri: 'http://localhost:8081/usr/home/main',
+				    });
+				  }
+		</script> 
+		<div class="mt-4">      
+	        <a id="kakao-login-btn" href="javascript:loginWithKakao()">
+	  			<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
+	    	alt="카카오 로그인 버튼" />
+			</a>	
+    	</div> 
         <script>
             function formCheck(frm) {
                  let msg ='';

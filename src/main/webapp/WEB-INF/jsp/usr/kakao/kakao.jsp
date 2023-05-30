@@ -34,7 +34,7 @@
   function loginWithKakao() {
     Kakao.Auth.authorize({
       redirectUri: 'http://localhost:8081/usr/home/main',
-      state: 'userme',
+      state: 'userme',// 필수 아닌듯
     });
   }
 
