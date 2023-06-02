@@ -1,5 +1,8 @@
 package com.example.project.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -8,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
@@ -19,13 +24,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class UsrHomeController {
-//	http://localhost:8081/usr/home/main
-//	@RequestMapping("/usr/home/main") //responsebody 내가 직접 응답을 못함
-//	public String showMain(String code) {
-//		return "usr/home/main";
-//	}
+
 	@GetMapping("/usr/home/main")
-	public @ResponseBody String kakaoCallback(String code) {
+	public String kakaoCallback(HttpServletRequest request, @RequestParam(required=false)String code) {
 		
 		
 		RestTemplate rt = new RestTemplate();
@@ -67,6 +68,7 @@ public class UsrHomeController {
 		}
 		
 		System.out.println("카카오 엑세스 토큰 : " + oauthToken.getAccess_token());
+
 		
 		RestTemplate rt2 = new RestTemplate();
 		
@@ -102,15 +104,19 @@ public class UsrHomeController {
 		System.out.println("카카오 아이디 번호 : " +kakaoProfile.getId());
 		System.out.println("카카오 사용자 : " +kakaoProfile.getProperties().getNickname());
 
+		// 2-2. id와 pwd가 일치하면,
+		HttpSession session = request.getSession();
 		
+		// 세션 객체에 id를 저장		
+		session.setAttribute("id",kakaoProfile.getId());
 
 		
-		return "kakao 토큰 요청 완료  :" + response2.getBody();
+		return "usr/home/main";
 	}
 	
 	
 	@RequestMapping("/")
-	public String showRoot() {
+	public String baseRoot() {
 		return "redirect:/usr/home/main";
 	}
 	
