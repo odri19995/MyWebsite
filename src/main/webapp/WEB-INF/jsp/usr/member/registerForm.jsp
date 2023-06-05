@@ -26,6 +26,8 @@
     <input class="input-field" type="text" name="pwd" placeholder="8~12자리의 영대소문자와 숫자 조합">
     <label for="">이름</label>
     <input class="input-field" type="text" name="name" placeholder="홍길동">
+    <label for="">닉네임</label>
+    <input class="input-field" type="text" name="nickname" placeholder="닉네임">
     <label for="">이메일</label>
     <input class="input-field" type="text" name="email" placeholder="example@gmail.co.kr"> 
     <div class="sns-chk">
