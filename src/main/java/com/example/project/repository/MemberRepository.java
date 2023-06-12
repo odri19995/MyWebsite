@@ -18,11 +18,9 @@ public interface MemberRepository {
 						loginPw = #{loginPw},
 						`name` = #{name},
 						nickname = #{nickname},
-						cellphoneNum = #{cellphoneNum},
 						email = #{email}
 			""")
-	public int doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
-			String email);
+	public int doJoin(String loginId, String loginPw, String name, String nickname, String email);
 	@Select(""" 
 				SELECT *
 					FROM `member`

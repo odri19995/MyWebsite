@@ -26,6 +26,8 @@
 			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/logout"><span>logout</span></a></li>
 		</c:if>
 	    <li><a href="<c:url value='/register/add'/>">Sign in</a></li>
+	    <li><a href="<c:url value='/usr/openai/chatbot'/>">chatbot</a></li>
+	    
 	    <li><a href=""><i class="fas fa-search small"></i></a></li>
 	</ul> 
 </div>

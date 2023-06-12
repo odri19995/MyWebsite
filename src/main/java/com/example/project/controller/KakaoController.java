@@ -3,6 +3,7 @@ package com.example.project.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.project.service.KakaoService;
 import com.example.project.vo.KakaoProfile;
 import com.example.project.vo.OAuthToken;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -23,6 +25,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class KakaoController {
+	
+	private KakaoService kakaoService;
+	
+	@Autowired
+	public KakaoController(KakaoService kakaoService) {
+		this.kakaoService = kakaoService;
+	}
+	
 	
 	@RequestMapping("/usr/kakao/kakaokey")
 	@ResponseBody
@@ -114,6 +124,11 @@ public class KakaoController {
 		
 		// 세션 객체에 id를 저장		
 		session.setAttribute("id",kakaoProfile.getId());
+		
+		
+		
 		return "redirect:/usr/home/main";
 	}
+	
+	
 }

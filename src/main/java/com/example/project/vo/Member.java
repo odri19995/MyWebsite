@@ -16,8 +16,8 @@ public class Member {
 	private int authLevel;
 	private String name;
 	private String nickname; 
-	private String cellphoneNum;
 	private String email;
+	private int kakaoStatus;
 	private int delStatus;
 	private String delDate;
 
