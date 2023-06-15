@@ -1,27 +1,35 @@
 package com.example.project.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
 public class OpenAIProfile {
 
-	public String id;
-	public String object;
-	public String model;
-	public choices choices;
+	private String id;
+	private String object;
+	private String model;
+	private Long created;
+	private Usage usage;
+	private List<Choices> choices;
 	
 	@Data
-	public class Properties {
-		public String nickname;
+	public static class Usage {
+		private int prompt_tokens;
+		private int completion_tokens;
+		private int total_tokens;
 	}
 
 	@Data
-	public class choices {
-		public message message;
+	public static class Choices {
+		private message message;
+		private String finish_reason;
+		private int index;
 		@Data
-		public class message {
-			public String role;
-			public String content;
+		public static class message {
+			private String role;
+			private String content;
 		}
 
 	}

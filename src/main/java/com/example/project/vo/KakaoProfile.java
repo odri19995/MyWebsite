@@ -12,22 +12,22 @@ public class KakaoProfile {
 	
 	@Data
 	public class Properties {
-		public String nickname;
+		private String nickname;
 	}
 
 	@Data
 	public class KakaoAccount {
-		public Boolean profile_nickname_needs_agreement;
-		public Profile profile;
-		public Boolean has_email;
-		public Boolean email_needs_agreement;
-		public Boolean has_gender;
-		public Boolean gender_needs_agreement;
-		public String email;
+		private Boolean profile_nickname_needs_agreement;
+		private Profile profile;
+		private Boolean has_email;
+		private Boolean email_needs_agreement;
+		private Boolean has_gender;
+		private Boolean gender_needs_agreement;
+		private String email;
 
 		@Data
 		public class Profile {
-			public String nickname;
+			private String nickname;
 		}
 
 	}

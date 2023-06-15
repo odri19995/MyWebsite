@@ -9,6 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.project.vo.KakaoProfile;
+import com.example.project.vo.OpenAIProfile;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Service
 public class OpenAIService {
 
@@ -26,7 +31,7 @@ public class OpenAIService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(openAIKey);  // Set OpenAI API key
 
-        // Create request body
+        // Create request body는 Json 양식
         String body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
 
         // Create entity
@@ -34,7 +39,18 @@ public class OpenAIService {
 
         // Send request
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
-		
+        
+        ObjectMapper objectMapper = new ObjectMapper();
+        OpenAIProfile openAIProfile = new OpenAIProfile();
+        
+        try {
+        	openAIProfile = objectMapper.readValue(response.getBody(),OpenAIProfile.class);
+        	System.out.println(openAIProfile);
+        } catch (JsonProcessingException e) {
+        	e.printStackTrace();
+        }
+        
+        		
 	
         return response.getBody();
     }
