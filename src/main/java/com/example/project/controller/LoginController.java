@@ -1,22 +1,22 @@
 package com.example.project.controller;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import com.example.project.service.MemberService;
 import com.example.project.util.Util;
@@ -48,24 +48,25 @@ public class LoginController {
 		//kakao logout
 		
 		if(session.getAttribute("kakaologin") != null) {
-			HttpClient client = HttpClient.newHttpClient();
-
-			HttpRequest request = HttpRequest.newBuilder()
-			    .uri(URI.create("https://kauth.kakao.com/oauth/logout?client_id=" + "ef68c2f02e7c9f1813716129dfbdccf5" + "&logout_redirect_uri=" + "http://localhost:8081/usr/home/main"))
-			    .GET()
-			    .build();
-
-			HttpResponse<String> response;
-			try {
-				response = client.send(request, HttpResponse.BodyHandlers.ofString());
-				System.out.println("gjhgjh : " + response);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			RestTemplate rt = new RestTemplate();
+			
+			// HttpHeader 오브젝트 생성
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Authorization", "Bearer "+session.getAttribute("kakaologin"));
+			
+			//HttpHeader를 하나의 오브젝트에 담기
+			HttpEntity<MultiValueMap<String,String>> kakaoLogoutRequest =
+				new HttpEntity<>(headers);
+			
+			// Http 요청하기 - post방식으로 -그리고 response변수의 응답을 받음
+			ResponseEntity<String> response = rt.exchange(
+					"https://kapi.kakao.com/v1/user/unlink",
+					HttpMethod.POST,
+					kakaoLogoutRequest,
+					String.class				
+			);
+			
+			System.out.println(response.getBody());
 			session.removeAttribute("kakaologin");
 		}
 		

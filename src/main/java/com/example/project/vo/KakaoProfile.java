@@ -1,8 +1,11 @@
 package com.example.project.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown =true)
 public class KakaoProfile {
 
 	public Long id;
@@ -11,11 +14,13 @@ public class KakaoProfile {
 	public KakaoAccount kakao_account;
 	
 	@Data
+	@JsonIgnoreProperties(ignoreUnknown =true)
 	public class Properties {
 		private String nickname;
 	}
 
 	@Data
+	@JsonIgnoreProperties(ignoreUnknown =true)
 	public class KakaoAccount {
 		private Boolean profile_nickname_needs_agreement;
 		private Profile profile;
@@ -26,6 +31,7 @@ public class KakaoProfile {
 		private String email;
 
 		@Data
+		@JsonIgnoreProperties(ignoreUnknown =true)
 		public class Profile {
 			private String nickname;
 		}
