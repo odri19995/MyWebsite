@@ -12,4 +12,4 @@ spring:
     password: 
 mybatis:
   type-aliases-package: com.koreaIT.final.vo
-openai.api.key : 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
+openai.api.key : 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

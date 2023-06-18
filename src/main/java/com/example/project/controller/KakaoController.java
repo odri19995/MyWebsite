@@ -124,6 +124,7 @@ public class KakaoController {
 		
 		// 세션 객체에 id를 저장		
 		session.setAttribute("id",kakaoProfile.getId());
+		session.setAttribute("kakaologin",oauthToken.getAccess_token());
 		
 		
 		

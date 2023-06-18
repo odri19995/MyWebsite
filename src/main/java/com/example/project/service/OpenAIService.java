@@ -49,9 +49,9 @@ public class OpenAIService {
         } catch (JsonProcessingException e) {
         	e.printStackTrace();
         }
-        
+       String reply =openAIProfile.getChoices().get(0).getMessage().getContent();
         		
 	
-        return response.getBody();
+        return reply;
     }
 }
