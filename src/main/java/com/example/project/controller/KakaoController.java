@@ -118,13 +118,13 @@ public class KakaoController {
 		
 		System.out.println("카카오 아이디 번호 : " +kakaoProfile.getId());
 		System.out.println("카카오 사용자 : " +kakaoProfile.getProperties().getNickname());
+
 		// 2-2. id와 pwd가 일치하면,
 		HttpSession session = request.getSession();
 		
 		// 세션 객체에 id를 저장		
 		session.setAttribute("id",kakaoProfile.getId());
 		session.setAttribute("kakaologin",oauthToken.getAccess_token());
-
 		
 		
 		
