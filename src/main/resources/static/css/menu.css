@@ -42,3 +42,13 @@ ul > li > a:hover {
     margin-right:auto;
     display: flex;
 }
+
+
+.btn-text-link {
+	color:white;
+}
+
+.btn-text-link:hover {
+	color:olive;
+/* 	text-decoration: underline; */
+}

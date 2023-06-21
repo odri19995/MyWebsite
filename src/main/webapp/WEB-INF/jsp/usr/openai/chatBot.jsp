@@ -10,6 +10,8 @@
 <!-- <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" /> -->
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- 테일윈드 치트 시트 불러오기 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 <link rel="stylesheet" href="/css/chatBot.css">
@@ -20,14 +22,18 @@
         // 챗봇 응답을 생성하는 함수
         function GetBotResponse() {
             var userText = document.getElementById("userInput").value;
-            var botResponse = "";
+            var htmlUser = '<div class="textbox">'+ userText + '</div>';
             
-            // 챗봇 응답 로직
-            if (userText.toLowerCase() === "안녕") {
-                botResponse = "안녕하세요!";
-            }
             // 챗봇 응답을 화면에 표시
-            document.getElementById("chatLog").innerHTML += "<br>사용자: " + userText;
+            let appendHtml = `<div class="chat ch2">
+            					<div class="icon"><i class="fa-solid fa-user"></i></div>
+            					\${htmlUser}
+            				</div>`;
+            
+            $(".wrap").append(appendHtml);
+            
+//             $(".chat.ch2").append('');
+//             $(".chat.ch2").append(htmlUser);
             GetOpenAIResponse();
         }
         
@@ -35,8 +41,17 @@
         	$.get('getchatbot', {
         		userInput : $("#userInput").val()
 			}, function(data){
+				var htmlBot = '<div class="textbox">'+ data + '</div>';
 	 			console.log(data);
-	            document.getElementById("chatLog").innerHTML += "<br>챗봇: " + data;
+	 			// \$ 스크립트내의 변수를 el 처럼 사용하는 방법 아닐경우 +로 이어줘야한다. 
+	 			let appendHtml = `<div class="chat ch1">
+									<div class="icon"><i class="fa-solid fa-user"></i></div>
+									\${htmlBot}
+								</div>`;
+	 			
+	 			$(".wrap").append(appendHtml);
+// 	 			$(".chat.ch1").append('<div class="icon"><i class="fa-solid fa-user"></i></div>');
+// 	            $(".chat.ch1").append(htmlBot);
 			}, 'text')
 		}
         
@@ -63,28 +78,15 @@
 	
 	
 	 <h1>Make your chatBot</h1>
-	<div id="chatLog">	</div>
 	 <div class="wrap">
-        <div class="chat ch1">
+        <div class="chat ch1" >
             <div class="icon"><i class="fa-solid fa-user"></i></div>
             <div class="textbox">안녕하세요. 반갑습니다.</div>
         </div>
-        <div class="chat ch2">
-            <div class="icon"><i class="fa-solid fa-user"></i></div>
-            <div class="textbox">안녕하세요. 친절한효자손입니다. 그동안 잘 지내셨어요?</div>
-        </div>
-        <div class="chat ch1">
-            <div class="icon"><i class="fa-solid fa-user"></i></div>
-            <div class="textbox">아유~ 너무요너무요! 요즘 어떻게 지내세요?</div>
-        </div>
-        <div class="chat ch2">
-            <div class="icon"><i class="fa-solid fa-user"></i></div>
-            <div class="textbox">뭐~ 늘 똑같은 하루 하루를 보내는 중이에요. 코로나가 다시 극성이어서 모이지도 못하구 있군요 ㅠㅠ 얼른 좀 잠잠해졌으면 좋겠습니다요!</div>
-        </div>
     </div>
-    <span>
+    <span class ="flex justify-end mt-1 mr-14" >
 	   	<input type="text" id="userInput" name="userInput" placeholder="메시지 입력" />
-	    <button type="button" onclick="GetBotResponse()">전송</button>
+	    <button class="ml-2 btn-text-link btn btn-active" onclick="GetBotResponse()">전송</button>
 	</span>    
 </body>
 </html>
