@@ -12,6 +12,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <!-- 테일윈드 치트 시트 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
+<!-- 데이지 UI -->
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 <link rel="stylesheet" href="/css/chatBot.css">
@@ -23,7 +25,7 @@
         function GetBotResponse() {
             var userText = document.getElementById("userInput").value;
             var htmlUser = '<div class="textbox">'+ userText + '</div>';
-            
+ 			// \$ 스크립트내의 변수를 el 처럼 사용하는 방법 아닐경우 +로 이어줘야한다. 
             // 챗봇 응답을 화면에 표시
             let appendHtml = `<div class="chat ch2">
             					<div class="icon"><i class="fa-solid fa-user"></i></div>
@@ -31,9 +33,7 @@
             				</div>`;
             
             $(".wrap").append(appendHtml);
-            
-//             $(".chat.ch2").append('');
-//             $(".chat.ch2").append(htmlUser);
+
             GetOpenAIResponse();
         }
         
@@ -50,43 +50,56 @@
 								</div>`;
 	 			
 	 			$(".wrap").append(appendHtml);
-// 	 			$(".chat.ch1").append('<div class="icon"><i class="fa-solid fa-user"></i></div>');
-// 	            $(".chat.ch1").append(htmlBot);
 			}, 'text')
 		}
+        
+//      Enter click event
+        $(document).ready(function() {
+            $("#userInput").keyup(function(event) {
+                if (event.which === 13) {
+                    $("#myBtn").click();
+                }
+            });
+         
+            $("#myBtn").click(function() {
+                console.log('clicked!');
+            })
+        });
         
     </script>
 </head>
 <body>
-	<div id="menu">
-		<ul>
-		    <li id="logo">ChatBot</li>
-		    <li><a href="<c:url value='/'/>">Home</a></li>
-		    <li><a href="<c:url value='/board/list'/>">Board</a></li>
-			<c:if test="${sessionScope.id == null }">
-				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/login"><span>login</span></a></li>
-			</c:if>
-			<c:if test="${sessionScope.id != null  }">
-				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/logout"><span>logout</span></a></li>
-			</c:if>
-		    <li><a href="<c:url value='/register/add'/>">Sign in</a></li>
-		    <li><a href="<c:url value='/usr/openai/chatbot'/>">chatbot</a></li>
-		    
-		    <li><a href=""><i class="fas fa-search small"></i></a></li>
-		</ul> 
-	</div>
-	
-	
-	 <h1>Make your chatBot</h1>
-	 <div class="wrap">
-        <div class="chat ch1" >
-            <div class="icon"><i class="fa-solid fa-user"></i></div>
-            <div class="textbox">안녕하세요. 반갑습니다.</div>
-        </div>
-    </div>
-    <span class ="flex justify-end mt-1 mr-14" >
-	   	<input type="text" id="userInput" name="userInput" placeholder="메시지 입력" />
-	    <button class="ml-2 btn-text-link btn btn-active" onclick="GetBotResponse()">전송</button>
-	</span>    
+	<section>
+		<div id="menu">
+			<ul>
+			    <li id="logo">ChatBot</li>
+			    <li><a href="<c:url value='/'/>">Home</a></li>
+			    <li><a href="<c:url value='/board/list'/>">Board</a></li>
+				<c:if test="${sessionScope.id == null }">
+					<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/login"><span>login</span></a></li>
+				</c:if>
+				<c:if test="${sessionScope.id != null  }">
+					<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/logout"><span>logout</span></a></li>
+				</c:if>
+			    <li><a href="<c:url value='/register/add'/>">Sign in</a></li>
+			    <li><a href="<c:url value='/usr/openai/chatbot'/>">chatbot</a></li>
+			    
+			    <li><a href=""><i class="fas fa-search small"></i></a></li>
+			</ul> 
+		</div>
+		
+		
+		 <h1>Make your chatBot</h1>
+		 <div class="wrap">
+	        <div class="chat ch1" >
+	            <div class="icon"><i class="fa-solid fa-user"></i></div>
+	            <div class="textbox">안녕하세요. 반갑습니다.</div>
+	        </div>
+	    </div>
+	    <span class ="flex justify-end mt-1 mr-14" >
+		   	<input  class = rounded type="text" id="userInput" name="userInput" placeholder="메시지 입력" />
+		    <button id="myBtn" class="ml-2 btn-text-link btn btn-active" onclick="GetBotResponse()">전송</button>
+		</span>
+	</section>    
 </body>
 </html>
