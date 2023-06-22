@@ -90,6 +90,12 @@
 		
 		
 		 <h1>Make your chatBot</h1>
+		 
+		 <div class = "instruction">
+		 
+		 
+		 </div>
+		 
 		 <div class="wrap">
 	        <div class="chat ch1" >
 	            <div class="icon"><i class="fa-solid fa-user"></i></div>

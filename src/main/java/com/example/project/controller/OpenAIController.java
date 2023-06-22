@@ -33,7 +33,11 @@ public class OpenAIController {
 	public String showChatBot(String userInput) {
 		
 		if (Util.empty(userInput)) {
-			return Util.jsHistoryBack("내용을 입력해주세요.");
+			return """
+					<script>
+						alert("내용을 입력해주세요");
+					</script>
+					""";
 		}
 
 		
