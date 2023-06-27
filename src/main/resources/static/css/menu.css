@@ -42,6 +42,12 @@ ul > li > a:hover {
     margin-right:auto;
     display: flex;
 }
+#menu {
+	display: flex;
+	position:fixed;
+	width: 100%;
+	z-index:999;
+}
 
 
 .btn-text-link {

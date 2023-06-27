@@ -38,7 +38,7 @@
         <div>
             <label><input type="checkbox" name="rememberId" ${empty cookie.id.value ? "" : "checked"}> 아이디 기억</label> |
             <a href="">비밀번호 찾기</a> |
-            <a href="">회원가입</a>
+            <a href="<c:url value='/register/add'/>">회원가입</a>
         </div>
 
 		<script>

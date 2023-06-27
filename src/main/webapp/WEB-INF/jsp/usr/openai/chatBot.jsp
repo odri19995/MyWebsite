@@ -3,14 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-<!-- 테일윈드 불러오기 -->
-<!-- 노말라이즈, 라이브러리 -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" /> -->
-<!-- 데이지 UI -->
-<!-- <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" /> -->
+<head>
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <!-- 테일윈드 치트 시트 불러오기 -->
+<!-- 노말라이즈, 라이브러리 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
 <!-- 데이지 UI -->
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
@@ -18,7 +15,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 <link rel="stylesheet" href="/css/chatBot.css">
 <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
-<head>
     <title>Chatbot</title>
     <script>
         // 챗봇 응답을 생성하는 함수
@@ -32,9 +28,14 @@
             					\${htmlUser}
             				</div>`;
             
-            $(".wrap").append(appendHtml);
-
-            GetOpenAIResponse();
+            let userMsg = document.getElementById("userInput").value.trim()
+            
+            if(userMsg.length>0){
+            	$(".wrap").append(appendHtml);
+            	GetOpenAIResponse();
+            }else{
+            	alert("내용을 입력해주세요");
+            }
         }
         
         function GetOpenAIResponse() {
@@ -91,9 +92,39 @@
 		
 		 <h1>Make your chatBot</h1>
 		 
-		 <div class = "instruction">
+		 <div class="form-control">
+ 			 <label class="label cursor-pointer">
+    			<input type="checkbox" class= "checkbox-instruction"/>
+   				 <span class="label-text"> 지시문 추가하기 </span>
+  			</label>
+		</div>
+		
+		<script>
+			let chk = $("input[type=checkbox]");			
+			chk.on("click", function() {
+				if (chk.is(":checked")==true){
+					console.log("체크된 상태");
+					addAttributeBlock();
+				}
+				if (chk.is(":checked")==false){
+					console.log("체크 안된 상태");
+					addAttributeNone();
+				}
+			});
+			function addAttributeNone() {
+// 			    document.getElementsByClassName("form-control").style.display = 'none';
+				$('.instructbox').css('display', 'none');
+			}
+			function addAttributeBlock() {
+				$('.instructbox').css('display', 'block');
+			}
+			
+		</script>
 		 
-		 
+		 <div class="instructbox">
+		 	<div class="instruction">
+		 		<input  class = rounded type="text" id="userInstruct" name="userInstruct" placeholder="&nbsp;&nbsp;지시문을 입력해주세요" />	
+		 	</div>
 		 </div>
 		 
 		 <div class="wrap">
@@ -103,7 +134,7 @@
 	        </div>
 	    </div>
 	    <span class ="flex justify-end mt-1 mr-14" >
-		   	<input  class = rounded type="text" id="userInput" name="userInput" placeholder="메시지 입력" />
+		   	<input  class = rounded type="text" id="userInput" name="userInput" placeholder="&nbsp;메시지 입력" />
 		    <button id="myBtn" class="ml-2 btn-text-link btn btn-active" onclick="GetBotResponse()">전송</button>
 		</span>
 	</section>    

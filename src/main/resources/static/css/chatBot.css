@@ -2,6 +2,27 @@ a {
     text-decoration: none;
 }
 
+body>section{
+    background: linear-gradient(to right, #B06AB3, #4568DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+    height: 100vh;
+    overflow:auto; 
+}
+
+h1{
+    margin-top: 3%;
+    font-size: 5rem;
+    color: white;
+}
+
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    max-height: 100%;
+   
+}
+
 .wrap {
     padding: 40px 0;
     background-color: #A8C0D6;
@@ -79,26 +100,26 @@ a {
 
 
 
-
-body>section{
-    background: linear-gradient(to right, #B06AB3, #4568DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
-    height: 100vh;
-    overflow:auto; 
+.instruction{
+	display:flex;
+	justify-content:center;
 }
 
-h1{
-    margin-top: 3%;
-    font-size: 5rem;
-    color: white;
+
+.instruction #userInstruct{
+  width:90%;
+  height:100px;
+  font-size:20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
 }
 
-html {
-    height: 100%;
+.label{
+	justify-content : flex-end;
+	margin-right:10px;
 }
-body {
-    min-height: 100%;
-    max-height: 100%;
-   
+.label .checkbox-instruction{
+	margin-right:10px;
+	
 }
-
 

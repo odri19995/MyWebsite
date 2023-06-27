@@ -32,15 +32,6 @@ public class OpenAIController {
 	@ResponseBody
 	public String showChatBot(String userInput) {
 		
-		if (Util.empty(userInput)) {
-			return """
-					<script>
-						alert("내용을 입력해주세요");
-					</script>
-					""";
-		}
-
-		
 		System.out.println(userInput);
 		String response = openAIService.getResponseFromOpenAI(userInput);
 		System.out.println(response);
