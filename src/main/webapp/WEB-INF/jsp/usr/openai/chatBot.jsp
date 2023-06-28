@@ -39,8 +39,20 @@
         }
         
         function GetOpenAIResponse() {
+        	
+        	//변수 검증
+        	let instruction = "";
+        	
+        	if( $("#userInstruct").val()== null){
+        		instruction = "";
+        	}else{
+        		instruction = $("#userInstruct").val();
+        	}
+        	console.log(instruction);
+        	
         	$.get('getchatbot', {
-        		userInput : $("#userInput").val()
+        		userInput : $("#userInput").val(),
+        		userInstruct : instruction
 			}, function(data){
 				var htmlBot = '<div class="textbox">'+ data + '</div>';
 	 			console.log(data);

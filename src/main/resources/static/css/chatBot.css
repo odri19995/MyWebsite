@@ -98,7 +98,9 @@ body {
     color: #F9EB54;
 }
 
-
+.instructbox{
+	display:none;
+}
 
 .instruction{
 	display:flex;
@@ -116,7 +118,7 @@ body {
 
 .label{
 	justify-content : flex-end;
-	margin-right:10px;
+	margin-right:100px;
 }
 .label .checkbox-instruction{
 	margin-right:10px;
