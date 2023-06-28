@@ -20,7 +20,7 @@ public class OpenAIService {
     @Value("${openai.api.key}")
     private String openAIKey;
 
-    public String getResponseFromOpenAI(String prompt) {
+    public String getResponseFromOpenAI(String userInstruct, String prompt) {
         RestTemplate restTemplate = new RestTemplate();
 
         // OpenAI API endpoint
@@ -32,7 +32,10 @@ public class OpenAIService {
         headers.setBearerAuth(openAIKey);  // Set OpenAI API key
 
         // Create request body는 Json 양식
-        String body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
+        String body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": " 
+        				+ "[{\"role\": \"system\", \"content\": \""+userInstruct+"\"}," 
+        				+ "{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
+        
 
         // Create entity
         HttpEntity<String> requestEntity = new HttpEntity<>(body, headers);

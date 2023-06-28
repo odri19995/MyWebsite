@@ -34,7 +34,7 @@ public class OpenAIController {
 		
 		System.out.println(userInstruct);
 		System.out.println(userInput);
-		String response = openAIService.getResponseFromOpenAI(userInput);
+		String response = openAIService.getResponseFromOpenAI(userInstruct,userInput);
 		System.out.println(response);
 		
 		return response;
