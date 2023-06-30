@@ -43,6 +43,23 @@ public class MemberService {
 		return ResultData.from("S-1", Util.f("%s회원님이 가입되었습니다", loginId),"id", memberRepository.getLastInsertId());
 	}
 	
+	public ResultData<Integer> doJoinKakao(Long id, String nickname, String email) {
+		
+		System.out.println("서비스카카오 아이디 번호 : " +id);
+		System.out.println("서비스카카오 닉네임 : " +nickname);
+		System.out.println("서비스카카오 이메일 : " +email);
+		String loginId = Long.toString(id);
+		
+		Member existsMember = getMemberByLoginId(loginId);
+		
+		if (existsMember != null) {
+			return ResultData.from("F-7", Util.f("이미 사용중인 아이디(%s) 입니다", loginId));
+		}
+		
+		memberRepository.doJoinKakao(loginId, nickname, email);
+		return ResultData.from("S-1", Util.f("%s회원님이 카카오톡으로 가입되었습니다", nickname),"id", memberRepository.getLastInsertId());
+	}
+	
 	private Member getMemberByNameAndEmail(String name, String email) {
 		return memberRepository.getMemberByNameAndEmail(name, email);
 	}
@@ -58,5 +75,6 @@ public class MemberService {
 	public Member getMemberById(int id) {
 		return memberRepository.getMemberById(id);
 	}
+
 	
 }

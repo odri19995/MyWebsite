@@ -30,9 +30,7 @@
     <input class="input-field" type="text" name="nickname" placeholder="닉네임">
     <label for="">이메일</label>
     <input class="input-field" type="text" name="email" placeholder="example@gmail.co.kr"> 
-    <div class="sns-chk">
-        <label><input type="checkbox" name="sns" value="kakaotalk"/>카카오톡</label>
-    </div>
+
     <button>회원 가입</button>
    </form> 
    <script>

@@ -21,6 +21,22 @@ public interface MemberRepository {
 						email = #{email}
 			""")
 	public int doJoin(String loginId, String loginPw, String name, String nickname, String email);
+	
+	@Insert("""
+			INSERT INTO `member`
+				SET regDate = NOW(),
+					updateDate = NOW(),
+					loginId = #{loginId},
+					loginPw = #{loginId},
+					`name` = #{nickname},
+					nickname = #{nickname},
+					email = #{email},
+					kakaoStatus = 1
+		""")
+	public void doJoinKakao(String loginId, String nickname, String email);
+	
+	
+	
 	@Select(""" 
 				SELECT *
 					FROM `member`
@@ -56,6 +72,14 @@ public interface MemberRepository {
 				AND email = #{email}
 			""")
 	public Member getMemberByNameAndEmail(String name, String email);
+	
+	
+	
+	
+	
+	
+	
+
 
 }
 

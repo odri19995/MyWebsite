@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.project.service.KakaoService;
+import com.example.project.service.MemberService;
+import com.example.project.util.Util;
 import com.example.project.vo.KakaoProfile;
 import com.example.project.vo.OAuthToken;
+import com.example.project.vo.ResultData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,10 +30,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class KakaoController {
 	
 	private KakaoService kakaoService;
+	private MemberService memberService;
 	
 	@Autowired
-	public KakaoController(KakaoService kakaoService) {
+	public KakaoController(KakaoService kakaoService, MemberService memberService ) {
 		this.kakaoService = kakaoService;
+		this.memberService = memberService;
 	}
 	
 	
@@ -126,8 +131,9 @@ public class KakaoController {
 		session.setAttribute("id",kakaoProfile.getId());
 		session.setAttribute("kakaologin",oauthToken.getAccess_token());
 		
+		ResultData<Integer> doJoinRd = memberService.doJoinKakao(kakaoProfile.getId(), kakaoProfile.getProperties().getNickname(),kakaoProfile.getKakao_account().getEmail());
 		
-		
+
 		return "redirect:/usr/home/main";
 	}
 	
