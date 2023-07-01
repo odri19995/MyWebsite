@@ -1,18 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<!-- 제이쿼리 불러오기 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<!-- 테일윈드 치트 시트 불러오기 -->
-<!-- 노말라이즈, 라이브러리 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
-<!-- 데이지 UI -->
-<link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
-<!-- 폰트어썸 불러오기 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+<%@ include file="../common/head.jsp" %>
 <link rel="stylesheet" href="/css/chatBot.css">
 <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
     <title>Chatbot</title>
@@ -94,7 +83,7 @@
 				<c:if test="${sessionScope.id != null  }">
 					<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/logout"><span>logout</span></a></li>
 				</c:if>
-			    <li><a href="<c:url value='/register/add'/>">Sign in</a></li>
+			    <li><a href="<c:url value='/usr/member/join'/>">Sign in</a></li>
 			    <li><a href="<c:url value='/usr/openai/chatbot'/>">chatbot</a></li>
 			    
 			    <li><a href=""><i class="fas fa-search small"></i></a></li>

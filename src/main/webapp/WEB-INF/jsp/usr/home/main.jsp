@@ -11,27 +11,36 @@
 	<meta charset="UTF-8">
     <title>mainPage</title>
     <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/> 
+
+<style>
+body { background-size:100% 100%;;
+		background:url('/images/bg1.jpg') no-repeat left top;
+		background-position: 0px 50%					
+}
+</style>
+
+
 </head>
 <body>
 <div id="menu">
 	<ul>
 	    <li id="logo">mainpage</li>
-	    <li><a href="<c:url value='/'/>">Home</a></li>
-	    <li><a href="<c:url value='/board/list'/>">Board</a></li>
+	    <li><a href="<c:url value='/'/>">홈</a></li>
+	    <li><a href="<c:url value='/usr/board/list'/>">게시판</a></li>
 		<c:if test="${sessionScope.id == null }">
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/login"><span>login</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/login"><span>로그인</span></a></li>
+		    <li><a href="<c:url value='/usr/member/join'/>">회원가입</a></li>
 		</c:if>
 		<c:if test="${sessionScope.id != null  }">
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/logout"><span>logout</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/logout"><span>로그아웃</span></a></li>
+	    	<li><a href="<c:url value='/usr/openai/chatbot'/>">챗봇</a></li>
 		</c:if>
-	    <li><a href="<c:url value='/register/add'/>">Sign in</a></li>
-	    <li><a href="<c:url value='/usr/openai/chatbot'/>">chatbot</a></li>
 	    
 	    <li><a href=""><i class="fas fa-search small"></i></a></li>
 	</ul> 
 </div>
-<div style="text-align:center">
+<div id ="bg1" style="text-align:center">
 	<h1>This is HOME</h1>
 	<h1>This is HOME</h1>
 	<h1>This is HOME</h1>

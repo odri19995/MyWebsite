@@ -2,6 +2,7 @@ package com.example.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -52,6 +53,16 @@ public class MemberController {
 		}
 		
 		return Util.jsReplace(doJoinRd.getMsg(), "/");
+	}
+	
+	
+	@Controller // ctrl+shift+o 자동 임포트 
+	public class RegisterController {
+//		@RequestMapping(value="/register/add", method=RequestMethod.GET) // 신규회원 가입
+		@GetMapping("/usr/member/join") // 4.3부터 추가
+		public String register() {
+			return "usr/member/registerForm";  // WEB-INF/views/registerForm.jsp
+		}
 	}
 	
 	

@@ -17,7 +17,7 @@ ul {
 ul > li {
     color: lightgray;
     height : 100%;
-    width:90px;
+    width:100px;
     display:flex;
     align-items: center;
 }
@@ -58,3 +58,5 @@ ul > li > a:hover {
 	color:olive;
 /* 	text-decoration: underline; */
 }
+
+

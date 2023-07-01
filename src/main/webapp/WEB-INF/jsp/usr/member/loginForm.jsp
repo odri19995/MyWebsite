@@ -26,8 +26,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 </head>
 <body>
@@ -41,8 +39,8 @@
 			</c:if>
 		</div>
 		<input type="text" name="id" value="${cookie.id.value}"
-			placeholder="이메일 입력" autofocus value=""> <input
-			type="password" name="pwd" placeholder="비밀번호">
+			placeholder="아이디 입력" autofocus value=""></input> 	
+		<input	type="password" name="pwd" placeholder="비밀번호"></input> 
 		<button>로그인</button>
 		<div>
 			<label><input type="checkbox" name="rememberId"
@@ -52,7 +50,7 @@
 
 		<script>
 			function GetkakaoKey() {
-				$.get('usr/kakao/kakaokey', {
+				$.get('kakao/kakaokey', {
 
 				}, function(data) {
 					Kakao.init(data);
