@@ -2,33 +2,24 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.net.URLDecoder"%>
-<!DOCTYPE html>
-<html lang="ko">
-<!-- 테일윈드 불러오기 -->
-<!-- 노말라이즈, 라이브러리 -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
-<!-- 데이지 UI -->
-<link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css"
-	rel="stylesheet" type="text/css" />
-<!-- 제이쿼리 불러오기 -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<!-- 폰트어썸 불러오기 -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+<%@ include file="../common/head.jsp" %>
 <link rel="stylesheet" href="/css/loginForm.css" />
+<head>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
 	integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx"
 	crossorigin="anonymous"></script>
-<head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="<c:url value='/css/bg.css'/>">
+
 <title>Login</title>
 
 </head>
 <body>
+	<section>
+<!-- 	배경자리 -->
+	</section>
 	<form action="<c:url value="/usr/login"/>" method="post"
 		onsubmit="return formCheck(this);">
 		<h3 id="title">Login</h3>
@@ -45,7 +36,7 @@
 		<div>
 			<label><input type="checkbox" name="rememberId"
 				${empty cookie.id.value ? "" : "checked"}> 아이디 기억</label> | <a
-				href="">비밀번호 찾기</a> | <a href="<c:url value='/register/add'/>">회원가입</a>
+				href="">비밀번호 찾기</a> | <a href="<c:url value='/usr/member/join'/>">회원가입</a>
 		</div>
 
 		<script>

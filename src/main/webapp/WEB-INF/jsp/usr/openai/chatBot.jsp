@@ -74,17 +74,17 @@
 	<section>
 		<div id="menu">
 			<ul>
-			    <li id="logo">ChatBot</li>
-			    <li><a href="<c:url value='/'/>">Home</a></li>
-			    <li><a href="<c:url value='/board/list'/>">Board</a></li>
+			    <li id="logo">mainpage</li>
+			    <li><a href="<c:url value='/'/>">홈</a></li>
+			    <li><a href="<c:url value='/usr/board/list'/>">게시판</a></li>
 				<c:if test="${sessionScope.id == null }">
-					<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/login"><span>login</span></a></li>
+					<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/login"><span>로그인</span></a></li>
+				    <li><a href="<c:url value='/usr/member/join'/>">회원가입</a></li>
 				</c:if>
 				<c:if test="${sessionScope.id != null  }">
-					<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/logout"><span>logout</span></a></li>
+					<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/logout"><span>로그아웃</span></a></li>
+			    	<li><a href="<c:url value='/usr/openai/chatbot'/>">챗봇</a></li>
 				</c:if>
-			    <li><a href="<c:url value='/usr/member/join'/>">Sign in</a></li>
-			    <li><a href="<c:url value='/usr/openai/chatbot'/>">chatbot</a></li>
 			    
 			    <li><a href=""><i class="fas fa-search small"></i></a></li>
 			</ul> 

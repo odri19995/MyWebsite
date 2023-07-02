@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+body>section{
+ 	background-image: url("/images/bg1.jpg");
+ 	background-size: cover; 
+    height: 100vh;
+    overflow:auto;
+    opacity: 0.4;
+}

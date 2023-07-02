@@ -10,9 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <link rel="stylesheet" href="/css/registerForm.css" />
+    <link rel="stylesheet" href="<c:url value='/css/bg.css'/>">
     <title>Register</title>
 </head>
 <body>
+<section>배경</section>
    <form action="<c:url value="/usr/member/doJoin"/>" method="post" onsubmit="return formCheck(this)">
     <div class="title">Register</div>
     <div id="msg" class="msg">
