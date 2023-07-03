@@ -228,6 +228,11 @@ public class LoginController {
 		session.setAttribute("kakaologin",oauthToken.getAccess_token());
 		
 		memberService.doJoinKakao(kakaoProfile.getId(), kakaoProfile.getProperties().getNickname(),kakaoProfile.getKakao_account().getEmail());
+		String id = Long.toString(kakaoProfile.getId());
+		Member member = memberService.getMemberByLoginId(id);
+		rq.login(member);
+		
+		
 		
 
 		return "redirect:/usr/home/main";

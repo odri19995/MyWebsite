@@ -72,25 +72,7 @@
 </head>
 <body>
 	<section>
-		<div id="menu">
-			<ul>
-			    <li id="logo">mainpage</li>
-			    <li><a href="<c:url value='/'/>">홈</a></li>
-			    <li><a href="<c:url value='/usr/board/list'/>">게시판</a></li>
-				<c:if test="${sessionScope.id == null }">
-					<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/login"><span>로그인</span></a></li>
-				    <li><a href="<c:url value='/usr/member/join'/>">회원가입</a></li>
-				</c:if>
-				<c:if test="${sessionScope.id != null  }">
-					<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/logout"><span>로그아웃</span></a></li>
-			    	<li><a href="<c:url value='/usr/openai/chatbot'/>">챗봇</a></li>
-				</c:if>
-			    
-			    <li><a href=""><i class="fas fa-search small"></i></a></li>
-			</ul> 
-		</div>
-		
-		
+<%@ include file="../common/menu.jsp" %>		
 		 <h1>Make your chatBot</h1>
 		 
 		 <div class="form-control">

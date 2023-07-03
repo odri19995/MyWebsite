@@ -34,7 +34,9 @@
     <input class="input-field" type="text" name="email" placeholder="example@gmail.co.kr"> 
 
     <button>회원 가입</button>
-   </form> 
+    <button class="btn-text-link btn btn-active" type="button" onclick="history.back();">뒤로가기</button> 
+   </form>
+
    <script>
        function formCheck(frm) {
             let msg ='';
