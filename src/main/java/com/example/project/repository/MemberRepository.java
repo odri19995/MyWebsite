@@ -75,6 +75,8 @@ public interface MemberRepository {
 	public Member getMemberByNameAndEmail(String name, String email);
 	
 	
+	
+	
 	@Update("""
 			UPDATE `member`
 				SET updateDate = NOW(),
@@ -83,6 +85,14 @@ public interface MemberRepository {
 				WHERE id = #{loginedMemberId}
 			""")
 	public void doModify(int loginedMemberId, String nickname,String email);
+	
+	@Update("""
+			UPDATE `member`
+				SET updateDate = NOW(),
+					loginPw = #{loginPw}
+				WHERE id = #{loginedMemberId}
+			""")
+	public void doPasswordModify(int loginedMemberId, String loginPw);
 
 	
 	

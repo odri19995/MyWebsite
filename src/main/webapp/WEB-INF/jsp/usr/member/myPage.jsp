@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="MyPage" />
+<c:set var="pageTitle" value="myPage" />
 <%@ include file="../common/head.jsp" %>
-	<section class="mt-8 text-xl">
+<link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
+</head>
+<body>
+<%@ include file="../common/menu.jsp" %>	
+	<section class="text-xl">
 		<div class="container mx-auto px-3">
 			<div class="table-box-type-1">
 				<table class="table table-zebra w-full">

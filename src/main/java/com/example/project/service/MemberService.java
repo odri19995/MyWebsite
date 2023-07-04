@@ -79,5 +79,7 @@ public class MemberService {
 		memberRepository.doModify(loginedMemberId, nickname, email);
 	}
 
-	
+	public void doPasswordModify(int loginedMemberId, String loginPw) {
+		memberRepository.doPasswordModify(loginedMemberId, loginPw);
+	}
 }

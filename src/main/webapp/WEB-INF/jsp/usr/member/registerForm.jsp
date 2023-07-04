@@ -1,17 +1,19 @@
-<%@ page contentType="text/html;charset=utf-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.net.URLDecoder"%>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<%@ include file="../common/head.jsp" %>
     <link rel="stylesheet" href="/css/registerForm.css" />
     <link rel="stylesheet" href="<c:url value='/css/bg.css'/>">
-    <title>Register</title>
+    <style>
+* {
+	margin:0;
+	padding:0;
+            
+}
+    </style>
+    
+    <title>Register</title>    
 </head>
 <body>
 <section>배경</section>

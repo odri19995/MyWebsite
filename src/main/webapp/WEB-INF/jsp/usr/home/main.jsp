@@ -34,6 +34,4 @@ $(".hover").mouseleave(
 
 
 
-
-</body>
-</html>
+<%@ include file="../common/foot.jsp" %>
