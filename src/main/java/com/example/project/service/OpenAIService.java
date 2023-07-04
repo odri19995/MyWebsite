@@ -1,5 +1,9 @@
 package com.example.project.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -37,12 +41,22 @@ public class OpenAIService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(openAIKey);  // Set OpenAI API key
+        
+//        List<String> pastPrompt = loadUserInputResponse();
+        String body;
 
         // Create request body는 Json 양식
-        String body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": " 
-        				+ "[{\"role\": \"system\", \"content\": \""+userInstruct+"\"}," 
-        				+ "{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
-        
+//        if(pastPrompt.size()>2) {
+//         body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": " 
+//        				+ "["+"{\"role\": \"system\", \"content\": \""+userInstruct+"\"},"
+//        				+pastPrompt.get(0) +","+pastPrompt.get(1) +","+ pastPrompt.get(2)+","
+//        				+ "{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
+//        }else {
+         body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": " 
+     				+ "[{\"role\": \"system\", \"content\": \""+userInstruct+"\"}," 
+     				+ "{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
+//        }
+//        System.out.println(body);
 
         // Create entity
         HttpEntity<String> requestEntity = new HttpEntity<>(body, headers);
@@ -67,11 +81,24 @@ public class OpenAIService {
 
 	public void setUserInputResponse(int memberId, String userInput, String response) {
 		
-		String body = userInput + response;
-		System.out.println(memberId);
+		String body ="{\"role\": \"user\", \"content\": \""  + userInput +"\"}" +","
+				+ "{\"role\": \"assistant\", \"content\": \"" + response +"\"}"; 
+		System.out.println(body);
 		
 		
 		openAIRepository.setUserInputResponse(memberId,userInput, response,body);
+		loadUserInputResponse();
 		
+	}
+	
+	// 최근 문답 3개 가져오기
+	public List<String> loadUserInputResponse() {
+		List<String> list = openAIRepository.loadUserInputResponse();
+		 List<String> reversedList = new ArrayList<>(list);
+		 Collections.reverse(reversedList);
+		 //첫번째 요소는 가장 최근 요소로
+//		 System.out.println(reversedList.get(0));
+
+		return reversedList;
 	}
 }
