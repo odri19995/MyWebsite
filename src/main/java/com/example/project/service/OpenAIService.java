@@ -1,5 +1,6 @@
 package com.example.project.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -9,13 +10,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.project.vo.KakaoProfile;
+import com.example.project.repository.OpenAIRepository;
 import com.example.project.vo.OpenAIProfile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class OpenAIService {
+	private OpenAIRepository openAIRepository;
+	
+	@Autowired
+	public OpenAIService(OpenAIRepository openAIRepository) {
+		this.openAIRepository = openAIRepository;
+	}
 
     @Value("${openai.api.key}")
     private String openAIKey;
@@ -57,4 +64,14 @@ public class OpenAIService {
 	
         return reply;
     }
+
+	public void setUserInputResponse(int memberId, String userInput, String response) {
+		
+		String body = userInput + response;
+		System.out.println(memberId);
+		
+		
+		openAIRepository.setUserInputResponse(memberId,userInput, response,body);
+		
+	}
 }

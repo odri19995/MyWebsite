@@ -3,10 +3,10 @@ package com.example.project.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.project.service.OpenAIService;
+import com.example.project.vo.Member;
 import com.example.project.vo.Rq;
 
 
@@ -32,10 +32,14 @@ public class OpenAIController {
 	@ResponseBody
 	public String showChatBot(String userInstruct, String userInput) {
 		
+		Member member= rq.getLoginedMember();
+		int memberId = member.getId();
+		
 		System.out.println(userInstruct);
 		System.out.println(userInput);
 		String response = openAIService.getResponseFromOpenAI(userInstruct,userInput);
 		System.out.println(response);
+		openAIService.setUserInputResponse(memberId,userInput,response);
 		
 		return response;
 		

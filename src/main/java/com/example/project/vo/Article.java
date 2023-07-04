@@ -10,11 +10,8 @@ import lombok.NoArgsConstructor;
 public class Article {
 	private int id;
 	private String regDate;
-	private String updateDate;
 	private int memberId;
-	private String title;
+	private String userMessage;
+	private String response;
 	private String body;
-	private String writerName;
-	private boolean actorCanChangeData;
-
 }

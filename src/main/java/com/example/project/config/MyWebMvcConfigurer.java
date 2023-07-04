@@ -29,12 +29,16 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		//모든 요청을 받는다.
 		registry.addInterceptor(beforeActionInterceptor).addPathPatterns("/**").excludePathPatterns("/resource/**");
 
-		registry.addInterceptor(needLoginInterceptor).addPathPatterns("/usr/article/write")
-		.addPathPatterns("/usr/article/doWrite").addPathPatterns("/usr/article/modify")
-		.addPathPatterns("/usr/article/doModify").addPathPatterns("/usr/article/doDelete")
-		.addPathPatterns("/usr/member/doLogout");
+		registry.addInterceptor(needLoginInterceptor).addPathPatterns("/usr/board/list")
+		.addPathPatterns("/usr/member/checkPassword").addPathPatterns("/usr/member/doCheckPassword")
+		.addPathPatterns("/usr/member/doModify").addPathPatterns("/usr/member/passwordModify")
+		.addPathPatterns("/usr/member/doPasswordModify").addPathPatterns("/usr/logout")
+		.addPathPatterns("/usr/openai/chatbot").addPathPatterns("/usr/openai/getchatbot");
 		
-		registry.addInterceptor(needLogoutInterceptor).addPathPatterns("/usr/login");
+		registry.addInterceptor(needLogoutInterceptor).addPathPatterns("/usr/login").addPathPatterns("/usr/kakao/kakaoLogin")
+		.addPathPatterns("/usr/member/doJoin").addPathPatterns("/usr/member/join")
+		
+		;
 	}
 
 }
