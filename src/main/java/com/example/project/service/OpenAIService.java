@@ -42,21 +42,21 @@ public class OpenAIService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(openAIKey);  // Set OpenAI API key
         
-//        List<String> pastPrompt = loadUserInputResponse();
+        List<String> pastPrompt = loadUserInputResponse();
         String body;
 
-        // Create request body는 Json 양식
-//        if(pastPrompt.size()>2) {
-//         body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": " 
-//        				+ "["+"{\"role\": \"system\", \"content\": \""+userInstruct+"\"},"
-//        				+pastPrompt.get(0) +","+pastPrompt.get(1) +","+ pastPrompt.get(2)+","
-//        				+ "{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
-//        }else {
+//         Create request body는 Json 양식
+        if(pastPrompt.size()>2) {
+         body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": " 
+        				+ "["+"{\"role\": \"system\", \"content\": \""+userInstruct+"\"},"
+        				+pastPrompt.get(0) +","+pastPrompt.get(1) +","+ pastPrompt.get(2)+","
+        				+ "{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
+        }else {
          body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": " 
      				+ "[{\"role\": \"system\", \"content\": \""+userInstruct+"\"}," 
      				+ "{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
-//        }
-//        System.out.println(body);
+        }
+        System.out.println(body);
 
         // Create entity
         HttpEntity<String> requestEntity = new HttpEntity<>(body, headers);
