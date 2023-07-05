@@ -4,30 +4,44 @@
 <%@ include file="../common/head.jsp" %>
     
 
+<link rel="stylesheet" href="<c:url value='/css/main.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
 </head>
+<style>
+section>div>table{
+border : 2px solid black;
+background-color: white;
+}
+
+
+</style>
+
+
 <body>
-<div id="menu">
-	<ul>
-	    <li id="logo">boardpage</li>
-	    <li><a href="<c:url value='/'/>">Home</a></li>
-	    <li><a href="<c:url value='/usr/board/list'/>">Board</a></li>
-		<c:if test="${sessionScope.id == null }">
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/login"><span>login</span></a></li>
-		</c:if>
-		<c:if test="${sessionScope.id != null  }">
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/logout"><span>logout</span></a></li>
-		</c:if>
-	    <li><a href="<c:url value='/usr/member/join'/>">Sign in</a></li>
-	    <li><a href=""><i class="fas fa-search small"></i></a></li>
-	</ul> 
-</div>
-<div style="text-align:center">
-	<h1>This is BOARD</h1>
-	<h1>This is BOARD</h1>
-	<h1>This is BOARD</h1>
-	<h1>This is BOARD</h1>
-	<h1>This is BOARD</h1>
-</div>
+<%@ include file="../common/menu.jsp" %>
+<section>
+			<div class="table-box-type-1">
+				<table>
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>날짜</th>
+							<th>메세지</th>
+							<th>응답</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="article" items="${articles }">
+							<tr>
+								<td>${article.id }</td>
+								<td>${article.regDate.substring(2, 16) }</td>
+								<td>${article.userMessage }</td>
+								<td>${article.response }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+ </section>			
 </body>
 </html>
