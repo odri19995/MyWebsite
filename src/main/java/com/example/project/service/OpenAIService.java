@@ -44,32 +44,61 @@ public class OpenAIService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(openAIKey);  // Set OpenAI API key
         
-//        List<String> pastPrompt = loadUserInputResponse();
+        List<String> pastUserPrompt = loadUserInput();
+        List<String> pastAIPrompt = loadAIresponse();
         JSONObject system = new JSONObject();
         JSONObject user = new JSONObject();
+        JSONObject assistant0 = new JSONObject();
+        JSONObject user0 = new JSONObject();
+        JSONObject assistant1 = new JSONObject();
+        JSONObject user1 = new JSONObject();
+        JSONObject assistant2 = new JSONObject();
+        JSONObject user2 = new JSONObject();
         JSONArray ja = new JSONArray();
         JSONObject body = new JSONObject();
+        
 
 //         Create request body는 Json 양식
-//        if(pastPrompt.size()>2) {
-//         body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": " 
-//        				+ "["+"{\"role\": \"system\", \"content\": \""+userInstruct+"\"},"
-//        				+pastPrompt.get(0) +","+pastPrompt.get(1) +","+ pastPrompt.get(2)+","
-//        				+ "{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
-//        }else {
+        if(pastUserPrompt.size()>2) {
+        	
+    		system.put("role","system");
+    		system.put("content",userInstruct );
+    		user0.put("role","user");
+    		user0.put("content", pastUserPrompt.get(0));
+    		assistant0.put("role","assistant");
+    		assistant0.put("content", pastAIPrompt.get(0));
+    		user1.put("role","user");
+    		user1.put("content", pastUserPrompt.get(1));
+    		assistant1.put("role","assistant");
+    		assistant1.put("content", pastAIPrompt.get(1));
+    		user2.put("role","user");
+    		user2.put("content", pastUserPrompt.get(2));
+    		assistant2.put("role","assistant");
+    		assistant2.put("content", pastAIPrompt.get(2));
+    		user.put("role","user");
+    		user.put("content", prompt);
+    		ja.put(system);
+    		ja.put(user0);
+    		ja.put(assistant0);
+    		ja.put(user1);
+    		ja.put(assistant1);
+    		ja.put(user2);
+    		ja.put(assistant2);
+    		ja.put(user);
+    	    body.put("model", "gpt-3.5-turbo");
+    	    body.put("messages", ja);
+    	}else {
 
-//		  String body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": " +
-//		  "[{\"role\": \"system\", \"content\": \""+userInstruct+"\"}," +
-//		  "{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
-//        }
-		system.put("role","system");
-		system.put("content",userInstruct );
-		user.put("role","user");
-		user.put("content", prompt);
-		ja.put(system);
-		ja.put(user);
-	    body.put("model", "gpt-3.5-turbo");
-	    body.put("messages", ja);
+    		system.put("role","system");
+    		system.put("content",userInstruct );
+    		user.put("role","user");
+    		user.put("content", prompt);
+    		ja.put(system);
+    		ja.put(user);
+    	    body.put("model", "gpt-3.5-turbo");
+    	    body.put("messages", ja);
+       }
+
         
 
         // Create entity
@@ -101,18 +130,31 @@ public class OpenAIService {
 		
 		
 		openAIRepository.setUserInputResponse(memberId,userInput, response,body);
-		loadUserInputResponse();
 		
 	}
 	
 	// 최근 문답 3개 가져오기
-	public List<String> loadUserInputResponse() {
-		List<String> list = openAIRepository.loadUserInputResponse();
+	public List<String> loadUserInput() {
+		List<String> list = openAIRepository.loadUserInput();
 		 List<String> reversedList = new ArrayList<>(list);
 		 Collections.reverse(reversedList);
 		 //첫번째 요소는 가장 최근 요소로
-//		 System.out.println(reversedList.get(0));
+		 System.out.println("reversedLsit(0) :" + reversedList.get(0));
+		 System.out.println("reversedLsit(1) :" + reversedList.get(1));
+		 System.out.println("reversedLsit(2) :" + reversedList.get(2));
 
 		return reversedList;
 	}
+	public List<String> loadAIresponse() {
+		List<String> list = openAIRepository.loadAIresponse();
+		 List<String> reversedList = new ArrayList<>(list);
+		 Collections.reverse(reversedList);
+		 //첫번째 요소는 가장 최근 요소로
+		 System.out.println("reversedLsit(0) :" + reversedList.get(0));
+		 System.out.println("reversedLsit(1) :" + reversedList.get(1));
+		 System.out.println("reversedLsit(2) :" + reversedList.get(2));
+
+		return reversedList;
+	}
+	
 }

@@ -22,12 +22,21 @@ public interface OpenAIRepository {
 	
 	
 	@Select(""" 
-			SELECT body
+			SELECT userMessage
 				FROM `article`
 				ORDER BY id DESC
 				LIMIT 3;
 		""")
-	public List<String> loadUserInputResponse();
+	public List<String> loadUserInput();
+	
+	
+	@Select(""" 
+			SELECT response
+				FROM `article`
+				ORDER BY id DESC
+				LIMIT 3;
+		""")
+	public List<String> loadAIresponse();
 
 	
 	
