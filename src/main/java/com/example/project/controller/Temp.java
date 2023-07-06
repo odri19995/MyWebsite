@@ -21,13 +21,13 @@ public class Temp {
 		ja.put(system);
 		ja.put(user);
 	     
-	    JSONObject jo = new JSONObject();
-	    jo.put("model", "gpt-3.5-turbo");
-	    jo.put("messages", ja);
+	    JSONObject body = new JSONObject();
+	    body.put("model", "gpt-3.5-turbo");
+	    body.put("messages", ja);
 	     
 
 	     
-	     System.out.println(jo.toString());
+	     System.out.println(body.toString());
 	}
 
 }

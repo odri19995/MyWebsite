@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -42,25 +44,37 @@ public class OpenAIService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(openAIKey);  // Set OpenAI API key
         
-        List<String> pastPrompt = loadUserInputResponse();
-        String body;
+//        List<String> pastPrompt = loadUserInputResponse();
+        JSONObject system = new JSONObject();
+        JSONObject user = new JSONObject();
+        JSONArray ja = new JSONArray();
+        JSONObject body = new JSONObject();
 
 //         Create request body는 Json 양식
-        if(pastPrompt.size()>2) {
-         body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": " 
-        				+ "["+"{\"role\": \"system\", \"content\": \""+userInstruct+"\"},"
-        				+pastPrompt.get(0) +","+pastPrompt.get(1) +","+ pastPrompt.get(2)+","
-        				+ "{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
-        }else {
-         body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": " 
-     				+ "[{\"role\": \"system\", \"content\": \""+userInstruct+"\"}," 
-     				+ "{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
-        }
-        System.out.println(body);
+//        if(pastPrompt.size()>2) {
+//         body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": " 
+//        				+ "["+"{\"role\": \"system\", \"content\": \""+userInstruct+"\"},"
+//        				+pastPrompt.get(0) +","+pastPrompt.get(1) +","+ pastPrompt.get(2)+","
+//        				+ "{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
+//        }else {
+
+//		  String body = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": " +
+//		  "[{\"role\": \"system\", \"content\": \""+userInstruct+"\"}," +
+//		  "{\"role\": \"user\", \"content\": \""+prompt+"\"}]}";
+//        }
+		system.put("role","system");
+		system.put("content",userInstruct );
+		user.put("role","user");
+		user.put("content", prompt);
+		ja.put(system);
+		ja.put(user);
+	    body.put("model", "gpt-3.5-turbo");
+	    body.put("messages", ja);
+        
 
         // Create entity
-        HttpEntity<String> requestEntity = new HttpEntity<>(body, headers);
-
+        HttpEntity<String> requestEntity = new HttpEntity<>(body.toString(), headers);
+        System.out.println(requestEntity.getBody());
         // Send request
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
         
