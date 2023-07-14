@@ -44,7 +44,6 @@ ul > li > a:hover {
 }
 #menu {
 	display: flex;
-	position:fixed;
 	width: 100%;
 	z-index:999;
 }
@@ -58,7 +57,26 @@ ul > li > a:hover {
 	color:olive;
 /* 	text-decoration: underline; */
 }
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 
+html > body {
+	font-family: 'NanumSquareNeo-Variable', sans-serif;
+}
+
+.table-box-type-1 > table {
+	width: 100%;
+}
+
+.table-box-type-1 > table th, .table-box-type-1 > table td {
+	border:2px solid black;
+	padding: 10px;
+	text-align: center;
+}
 
 
 

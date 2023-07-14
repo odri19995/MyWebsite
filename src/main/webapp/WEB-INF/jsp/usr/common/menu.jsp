@@ -17,6 +17,3 @@
 		</c:if>
 	</ul> 
 </div>
-
-
-    <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">

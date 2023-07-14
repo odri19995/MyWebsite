@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="/css/chatBot.css">
 <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
     <title>Chatbot</title>
+<style>
+#menu{
+	position:fixed;
+}
+</style>    
     <script>
         // 챗봇 응답을 생성하는 함수
         function GetBotResponse() {

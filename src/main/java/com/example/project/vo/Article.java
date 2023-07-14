@@ -12,4 +12,5 @@ public class Article {
 	private String regDate;
 	private int memberId;
 	private String title;
+	private String writerName;
 }
