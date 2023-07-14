@@ -75,6 +75,12 @@
 	<section>
 <%@ include file="../common/menu.jsp" %>		
 		 <h1>Make your chatBot</h1>
+		<form action="doWrite" method="POST">
+			<div>
+				제목 : <input name="title" type="text" placeholder="제목을 입력해주세요"/>
+			</div>
+			<button>작성</button>
+		</form>	
 		 
 		 <div class="form-control">
  			 <label class="label cursor-pointer">
@@ -121,6 +127,7 @@
 		   	<input  class = rounded type="text" id="userInput" name="userInput" placeholder="&nbsp;메시지 입력" />
 		    <button id="myBtn" class="ml-2 btn-text-link btn btn-active" onclick="GetBotResponse()">전송</button>
 		</span>
+
 	</section>    
 </body>
 </html>

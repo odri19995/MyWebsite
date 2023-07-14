@@ -9,21 +9,21 @@ import org.apache.ibatis.annotations.Select;
 public interface OpenAIRepository {
 
 	@Insert("""
-			INSERT INTO `article`
+			INSERT INTO `chat`
 				SET regDate = NOW(),
 					memberId = #{id},
+					articleId = 0,
 					userMessage = #{userInput},
-					response = #{response},
-					`body` = #{body};
+					response = #{response}
 		""")
-	public void setUserInputResponse(int id, String userInput, String response, String body);
+	public void setUserInputResponse(int id, String userInput, String response);
 
 	
 	
 	
 	@Select(""" 
 			SELECT userMessage
-				FROM `article`
+				FROM `chat`
 				ORDER BY id DESC
 				LIMIT 3;
 		""")
@@ -32,11 +32,21 @@ public interface OpenAIRepository {
 	
 	@Select(""" 
 			SELECT response
-				FROM `article`
+				FROM `chat`
 				ORDER BY id DESC
 				LIMIT 3;
 		""")
 	public List<String> loadAIresponse();
+
+
+
+	@Select(""" 
+			SELECT response
+				FROM `chat`
+				ORDER BY id DESC
+				LIMIT 1;
+		""")
+	public int loadTrunId();
 
 	
 	

@@ -2,6 +2,7 @@ package com.example.project.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +22,18 @@ public class ArticleService {
 	public List<Article> getArticles(){
 		return articleRepository.getArticles();
 	}
+
+	public void writeArticle(String title, int memberId) {
+		articleRepository.writeArticle(title,memberId);
+		
+	}
+	
+	
+
+	public int getLastInsertId() {
+		return articleRepository.getLastInsertId();
+	}
+	
+	
 
 	}

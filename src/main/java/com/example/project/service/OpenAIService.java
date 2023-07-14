@@ -122,16 +122,19 @@ public class OpenAIService {
         return reply;
     }
 
-	public void setUserInputResponse(int memberId, String userInput, String response) {
-		
-		String body ="{\"role\": \"user\", \"content\": \""  + userInput +"\"}" +","
-				+ "{\"role\": \"assistant\", \"content\": \"" + response +"\"}"; 
-		System.out.println(body);
-		
-		
-		openAIRepository.setUserInputResponse(memberId,userInput, response,body);
+	public void setUserInputResponse(int memberId, String userInput, String response) {		
+		openAIRepository.setUserInputResponse(memberId,userInput, response);
 		
 	}
+	// 이전 게시글 번호 가져오기
+	
+	public int loadTrunId() {
+		int recentTrunId = openAIRepository.loadTrunId();
+		return recentTrunId;
+	}
+	
+	
+	
 	
 	// 최근 문답 3개 가져오기
 	public List<String> loadUserInput() {
@@ -139,9 +142,6 @@ public class OpenAIService {
 		 List<String> reversedList = new ArrayList<>(list);
 		 Collections.reverse(reversedList);
 		 //첫번째 요소는 가장 최근 요소로
-		 System.out.println("reversedLsit(0) :" + reversedList.get(0));
-		 System.out.println("reversedLsit(1) :" + reversedList.get(1));
-		 System.out.println("reversedLsit(2) :" + reversedList.get(2));
 
 		return reversedList;
 	}
@@ -150,11 +150,10 @@ public class OpenAIService {
 		 List<String> reversedList = new ArrayList<>(list);
 		 Collections.reverse(reversedList);
 		 //첫번째 요소는 가장 최근 요소로
-		 System.out.println("reversedLsit(0) :" + reversedList.get(0));
-		 System.out.println("reversedLsit(1) :" + reversedList.get(1));
-		 System.out.println("reversedLsit(2) :" + reversedList.get(2));
 
 		return reversedList;
 	}
+	
+	
 	
 }
