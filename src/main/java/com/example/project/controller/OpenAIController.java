@@ -1,6 +1,8 @@
 package com.example.project.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +22,7 @@ public class OpenAIController {
 	private OpenAIService openAIService;
 	private ArticleService articleService;
 	private Rq rq;
-	ArrayList<String> usrInputs = new ArrayList<>();
+	ArrayList<String> userInputs = new ArrayList<>();
 	ArrayList<String> botResponses = new ArrayList<>();
 
 	
@@ -29,7 +31,7 @@ public class OpenAIController {
 		this.openAIService = openAIService;
 		this.articleService = articleService;
 		this.rq = rq;
-		usrInputs = new ArrayList<>();
+		userInputs = new ArrayList<>();
 		botResponses = new ArrayList<>();
 	}
 	
@@ -50,7 +52,7 @@ public class OpenAIController {
 		String response = openAIService.getResponseFromOpenAI(userInstruct,userInput);
 		System.out.println(response);
 		
-		usrInputs.add(userInput);
+		userInputs.add(userInput);
 		botResponses.add(response);
 		//데이터를 넣는 로직
 //		openAIService.setUserInputResponse(memberId,userInput,response);
@@ -73,7 +75,12 @@ public class OpenAIController {
 		
 		articleService.writeArticle(title,memberId );
 		int id = articleService.getLastInsertId(); 
-		
+		int n = userInputs.size();
+		for(int i = 0; i<n ;i++) {
+			openAIService.setUserInputResponse(memberId,id,userInputs.get(i),botResponses.get(i));
+		}
+		userInputs.clear();
+		botResponses.clear();
 		return Util.jsReplace(Util.f("%d번 게시물이 생성되었습니다", id), "/usr/openai/chatbot");
 	}
 	

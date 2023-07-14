@@ -12,11 +12,11 @@ public interface OpenAIRepository {
 			INSERT INTO `chat`
 				SET regDate = NOW(),
 					memberId = #{id},
-					articleId = 0,
+					articleId = #{articleId},
 					userMessage = #{userInput},
 					response = #{response}
 		""")
-	public void setUserInputResponse(int id, String userInput, String response);
+	public void setUserInputResponse(int id,int articleId, String userInput, String response);
 
 	
 	

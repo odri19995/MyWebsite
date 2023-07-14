@@ -122,8 +122,8 @@ public class OpenAIService {
         return reply;
     }
 
-	public void setUserInputResponse(int memberId, String userInput, String response) {		
-		openAIRepository.setUserInputResponse(memberId,userInput, response);
+	public void setUserInputResponse(int memberId,int articleId, String userInput, String response) {		
+		openAIRepository.setUserInputResponse(memberId,articleId, userInput, response);
 		
 	}
 	// 이전 게시글 번호 가져오기
