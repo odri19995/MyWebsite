@@ -5,7 +5,7 @@
 	<ul>
 	    <li id="logo">${pageTitle}</li>
 	    <li><a href="<c:url value='/'/>">홈</a></li>
-	    <li><a href="<c:url value='/usr/board/list'/>">게시판</a></li>
+	    <li><a href="<c:url value='/usr/article/list'/>">게시판</a></li>
 		<c:if test="${sessionScope.id == null }">
 			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/login"><span>로그인</span></a></li>
 		    <li><a href="<c:url value='/usr/member/join'/>">회원가입</a></li>

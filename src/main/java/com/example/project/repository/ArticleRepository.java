@@ -33,6 +33,15 @@ public interface ArticleRepository {
 					memberId = #{memberId}
 		""")
 	public void writeArticle(String title, int memberId);
+
+	@Select("""
+		SELECT A.*, M.userMessage,M.response
+				FROM article AS A
+				INNER JOIN `chat` AS M
+				ON A.id = M.articleId
+				WHERE A.id = #{id}	
+			""")
+	public Article[] getForPrintArticles(int id);
 	
 	
 }

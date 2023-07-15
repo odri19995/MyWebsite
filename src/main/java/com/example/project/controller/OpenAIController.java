@@ -35,7 +35,9 @@ public class OpenAIController {
 	
 	
 	@RequestMapping("/usr/openai/chatbot")
-	public String showChatBot() {	
+	public String showChatBot() {
+		userInputs.clear();
+		botResponses.clear();
 		return "usr/openai/chatBot";
 	}
 	

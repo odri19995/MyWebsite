@@ -13,4 +13,6 @@ public class Article {
 	private int memberId;
 	private String title;
 	private String writerName;
+	private String userMessage;
+	private String response;
 }
