@@ -54,8 +54,6 @@ public class OpenAIController {
 		
 		userInputs.add(userInput);
 		botResponses.add(response);
-		//데이터를 넣는 로직
-//		openAIService.setUserInputResponse(memberId,userInput,response);
 		
 		return response;
 		
@@ -79,8 +77,6 @@ public class OpenAIController {
 		for(int i = 0; i<n ;i++) {
 			openAIService.setUserInputResponse(memberId,id,userInputs.get(i),botResponses.get(i));
 		}
-		userInputs.clear();
-		botResponses.clear();
 		return Util.jsReplace(Util.f("%d번 게시물이 생성되었습니다", id), "/usr/openai/chatbot");
 	}
 	

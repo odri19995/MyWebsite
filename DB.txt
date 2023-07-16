@@ -69,6 +69,7 @@ nickname = '유저2',
 email = 'test2@naver.com';
 
 SELECT * FROM article;
+SELECT * FROM chat;
 
 SELECT `body` FROM article
 ORDER BY id DESC
@@ -79,7 +80,20 @@ SELECT * FROM `member`;
 SELECT LAST_INSERT_ID();	
 
 
-			SELECT turnId
+			SELECT *
 				FROM `article`
 				ORDER BY id DESC
 				LIMIT 1;
+				
+		SELECT A.*, M.userMessage,M.response
+				FROM article AS A
+				INNER JOIN `chat` AS M
+				ON A.id = M.articleId
+				WHERE A.id = 5	
+				
+			SELECT A.*, M.name AS writerName 
+			FROM article AS A
+			INNER JOIN `member` AS M
+			ON A.memberId = M.id
+			WHERE memberId = 1
+			ORDER BY id DESC	

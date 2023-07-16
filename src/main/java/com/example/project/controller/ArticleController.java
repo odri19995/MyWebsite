@@ -13,28 +13,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.project.service.ArticleService;
 import com.example.project.vo.Article;
+import com.example.project.vo.Rq;
 
 @Controller
 @RequestMapping("/usr/article")
 public class ArticleController {
 	private ArticleService articleService;
+	private Rq rq;
 	
 	@Autowired
-	public ArticleController(ArticleService articleService) {
+	public ArticleController(ArticleService articleService, Rq rq) {
 		this.articleService = articleService;
+		this.rq = rq;
 	}
 	
 	
 	@GetMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
+		int memberId =rq.getLoginedMemberId(); 
 		if(!loginCheck(request))
 			return "redirect:/usr/login";  // 로그인을 안했으면 로그인 화면으로 이동
 		
-		List<Article> articles = articleService.getArticles();
+		List<Article> articles = articleService.getArticles(memberId);
 		
 		model.addAttribute("articles", articles);
 		
@@ -42,7 +45,6 @@ public class ArticleController {
 	}
 	
 	@GetMapping("/detail")
-	@ResponseBody
 	public String showDetail(Model model, int id) {
 		
 		Article[] articles = articleService.getForPrintArticles(id);
@@ -55,7 +57,11 @@ public class ArticleController {
 			userMessages.add(article.getUserMessage());
 			responses.add(article.getResponse());	
 		}
-		return responses.get(1);
+		
+		
+		model.addAttribute("userMessages", userMessages);
+		model.addAttribute("responses", responses);
+		return "usr/article/detail";
 	}
 	
 
