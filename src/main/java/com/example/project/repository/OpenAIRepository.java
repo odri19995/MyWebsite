@@ -24,31 +24,20 @@ public interface OpenAIRepository {
 	@Select(""" 
 			SELECT userMessage
 				FROM `chat`
+				WHERE MemberId = #{memberId}
 				ORDER BY id DESC
 				LIMIT 3;
 		""")
-	public List<String> loadUserInput();
+	public List<String> loadUserInput(int memberId);
 	
 	
 	@Select(""" 
 			SELECT response
 				FROM `chat`
+				WHERE MemberId = #{memberId}
 				ORDER BY id DESC
 				LIMIT 3;
 		""")
-	public List<String> loadAIresponse();
-
-
-
-	@Select(""" 
-			SELECT response
-				FROM `chat`
-				ORDER BY id DESC
-				LIMIT 1;
-		""")
-	public int loadTrunId();
-
-	
-	
+	public List<String> loadAIresponse(int memberId);
 	
 }

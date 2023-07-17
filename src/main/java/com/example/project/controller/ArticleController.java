@@ -61,6 +61,9 @@ public class ArticleController {
 		
 		model.addAttribute("userMessages", userMessages);
 		model.addAttribute("responses", responses);
+		System.out.println(userMessages);
+		System.out.println(responses);
+		
 		return "usr/article/detail";
 	}
 	

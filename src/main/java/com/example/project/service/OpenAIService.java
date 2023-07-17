@@ -33,7 +33,7 @@ public class OpenAIService {
     @Value("${openai.api.key}")
     private String openAIKey;
 
-    public String getResponseFromOpenAI(String userInstruct, String prompt) {
+    public String getResponseFromOpenAI(String userInstruct, String prompt, int memberId) {
         RestTemplate restTemplate = new RestTemplate();
 
         // OpenAI API endpoint
@@ -44,8 +44,8 @@ public class OpenAIService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(openAIKey);  // Set OpenAI API key
         
-        List<String> pastUserPrompt = loadUserInput();
-        List<String> pastAIPrompt = loadAIresponse();
+        List<String> pastUserPrompt = loadUserInput(memberId);
+        List<String> pastAIPrompt = loadAIresponse(memberId);
         JSONObject system = new JSONObject();
         JSONObject user = new JSONObject();
         JSONObject assistant0 = new JSONObject();
@@ -126,27 +126,19 @@ public class OpenAIService {
 		openAIRepository.setUserInputResponse(memberId,articleId, userInput, response);
 		
 	}
-	// 이전 게시글 번호 가져오기
-	
-	public int loadTrunId() {
-		int recentTrunId = openAIRepository.loadTrunId();
-		return recentTrunId;
-	}
-	
-	
-	
+
 	
 	// 최근 문답 3개 가져오기
-	public List<String> loadUserInput() {
-		List<String> list = openAIRepository.loadUserInput();
+	public List<String> loadUserInput(int memberId) {
+		List<String> list = openAIRepository.loadUserInput(memberId);
 		 List<String> reversedList = new ArrayList<>(list);
 		 Collections.reverse(reversedList);
 		 //첫번째 요소는 가장 최근 요소로
 
 		return reversedList;
 	}
-	public List<String> loadAIresponse() {
-		List<String> list = openAIRepository.loadAIresponse();
+	public List<String> loadAIresponse(int memberId) {
+		List<String> list = openAIRepository.loadAIresponse(memberId);
 		 List<String> reversedList = new ArrayList<>(list);
 		 Collections.reverse(reversedList);
 		 //첫번째 요소는 가장 최근 요소로

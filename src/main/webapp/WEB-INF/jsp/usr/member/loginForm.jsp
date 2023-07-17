@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.net.URLDecoder"%>
+<c:set var="pageTitle" value="loginform" />
 <%@ include file="../common/head.jsp" %>
 <link rel="stylesheet" href="/css/loginForm.css" />
 <head>

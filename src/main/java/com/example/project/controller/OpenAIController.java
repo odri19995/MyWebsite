@@ -45,11 +45,12 @@ public class OpenAIController {
 	@ResponseBody
 	public String showChatBot(String userInstruct, String userInput) {
 		
-
+		Member member= rq.getLoginedMember();
+		int memberId = member.getId();
 		
 		System.out.println(userInstruct);
 		System.out.println(userInput);
-		String response = openAIService.getResponseFromOpenAI(userInstruct,userInput);
+		String response = openAIService.getResponseFromOpenAI(userInstruct,userInput,memberId);
 		System.out.println(response);
 		
 		userInputs.add(userInput);

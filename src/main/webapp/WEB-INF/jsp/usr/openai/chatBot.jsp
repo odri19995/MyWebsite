@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="../common/head.jsp" %>
 <c:set var="pageTitle" value="chatBot" />
+<%@ include file="../common/head.jsp" %>
 <link rel="stylesheet" href="/css/chatBot.css">
 <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
     <title>Chatbot</title>
