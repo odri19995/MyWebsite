@@ -56,6 +56,8 @@ public class OpenAIController {
 		userInputs.add(userInput);
 		botResponses.add(response);
 		
+		openAIService.passArrays(userInputs,botResponses);
+		
 		return response;
 		
 		

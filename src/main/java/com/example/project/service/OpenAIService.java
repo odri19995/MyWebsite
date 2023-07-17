@@ -24,10 +24,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class OpenAIService {
 	private OpenAIRepository openAIRepository;
+	ArrayList<String> userInputs = new ArrayList<>();
+	ArrayList<String> botResponses = new ArrayList<>();
 	
 	@Autowired
 	public OpenAIService(OpenAIRepository openAIRepository) {
 		this.openAIRepository = openAIRepository;
+		userInputs = new ArrayList<>();
+		botResponses = new ArrayList<>();
 	}
 
     @Value("${openai.api.key}")
@@ -44,8 +48,7 @@ public class OpenAIService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(openAIKey);  // Set OpenAI API key
         
-        List<String> pastUserPrompt = loadUserInput(memberId);
-        List<String> pastAIPrompt = loadAIresponse(memberId);
+
         JSONObject system = new JSONObject();
         JSONObject user = new JSONObject();
         JSONObject assistant0 = new JSONObject();
@@ -59,22 +62,22 @@ public class OpenAIService {
         
 
 //         Create request body는 Json 양식
-        if(pastUserPrompt.size()>2) {
+        if(botResponses.size()>2) {
         	
     		system.put("role","system");
     		system.put("content",userInstruct );
     		user0.put("role","user");
-    		user0.put("content", pastUserPrompt.get(0));
+    		user0.put("content", userInputs.get(botResponses.size()-3));
     		assistant0.put("role","assistant");
-    		assistant0.put("content", pastAIPrompt.get(0));
+    		assistant0.put("content", botResponses.get(botResponses.size()-3));
     		user1.put("role","user");
-    		user1.put("content", pastUserPrompt.get(1));
+    		user1.put("content", userInputs.get(botResponses.size()-2));
     		assistant1.put("role","assistant");
-    		assistant1.put("content", pastAIPrompt.get(1));
+    		assistant1.put("content", botResponses.get(botResponses.size()-2));
     		user2.put("role","user");
-    		user2.put("content", pastUserPrompt.get(2));
+    		user2.put("content", userInputs.get(botResponses.size()-1));
     		assistant2.put("role","assistant");
-    		assistant2.put("content", pastAIPrompt.get(2));
+    		assistant2.put("content", botResponses.get(botResponses.size()-1));
     		user.put("role","user");
     		user.put("content", prompt);
     		ja.put(system);
@@ -87,6 +90,8 @@ public class OpenAIService {
     		ja.put(user);
     	    body.put("model", "gpt-3.5-turbo");
     	    body.put("messages", ja);
+    	    userInputs.remove(0);
+    	    botResponses.remove(0);
     	}else {
 
     		system.put("role","system");
@@ -97,6 +102,7 @@ public class OpenAIService {
     		ja.put(user);
     	    body.put("model", "gpt-3.5-turbo");
     	    body.put("messages", ja);
+    	    System.out.println("이전 대화 미적용상태");
        }
 
         
@@ -121,29 +127,17 @@ public class OpenAIService {
 	
         return reply;
     }
-
+//  DB에 추가하는 메서드
 	public void setUserInputResponse(int memberId,int articleId, String userInput, String response) {		
 		openAIRepository.setUserInputResponse(memberId,articleId, userInput, response);
 		
 	}
 
-	
-	// 최근 문답 3개 가져오기
-	public List<String> loadUserInput(int memberId) {
-		List<String> list = openAIRepository.loadUserInput(memberId);
-		 List<String> reversedList = new ArrayList<>(list);
-		 Collections.reverse(reversedList);
-		 //첫번째 요소는 가장 최근 요소로
-
-		return reversedList;
-	}
-	public List<String> loadAIresponse(int memberId) {
-		List<String> list = openAIRepository.loadAIresponse(memberId);
-		 List<String> reversedList = new ArrayList<>(list);
-		 Collections.reverse(reversedList);
-		 //첫번째 요소는 가장 최근 요소로
-
-		return reversedList;
+	public void passArrays(ArrayList<String> userInputss, ArrayList<String> botResponsess) {
+		botResponses =botResponsess;
+		userInputs = userInputss;
+		System.out.println(userInputs);
+		
 	}
 	
 	
