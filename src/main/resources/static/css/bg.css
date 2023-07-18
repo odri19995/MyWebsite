@@ -5,7 +5,8 @@ body>section{
  	background-size: cover; 
     height: 100vh;
     overflow:auto;
-    opacity: 0.4;
+	opacity: 0.4;
+	z-index: auto;
 
     
 }

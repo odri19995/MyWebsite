@@ -16,23 +16,18 @@
 </head>
 <body>
 <%@ include file="../common/menu.jsp" %>
-	<section> 배경
-			<figure class="snip1504 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample59.jpg" alt="sample59" />
- 			 <figcaption>
-   				 <h3>Sheq Bivouac</h3>
-  			  	<h5>Branding</h5>
-  			</figcaption>
- 			 <a href="#"></a>
-			</figure>
-	</section>
-<script>
-$(".hover").mouseleave(
-  function() {
-    $(this).removeClass("hover");
-  }
-);
-</script>	
+<section>
+<!-- 배경 자리 -->
+</section>
+	<div class = "hero">
+		<h2>USE EASY CHATBOT</h2>
+		<p>간편한 대화 부터 간단한 설정까지,<br> 당신의 소중한 대화를 간직하세요. </p>
+		<button> Chat GPT </button>
+	</div>
 
+
+
+	
 
 
 <%@ include file="../common/foot.jsp" %>

@@ -15,25 +15,24 @@
 <body>
 	<section>
 <%@ include file="../common/menu.jsp" %>
-	<h1>usermessages:${userMessages[0]}</h1>
-		 <div class="wrap">
-	        <div class="chat ch1" >
-	            <div class="icon"><i class="fa-solid fa-user"></i></div>
-	            <div class="textbox">안녕하세요. 반갑습니다.</div>
-	        </div>
-			<c:forEach items="${userMessages}" var="userMessage" varStatus="status">
-			    <div class="chat ch2">
-			        <div class="icon"><i class="fa-solid fa-user"></i></div>
-			        <div class="textbox">${userMessage}</div>
-			    </div>
-			    <div class="chat ch1">
-			        <div class="icon"><i class="fa-solid fa-user"></i></div>
-			        <div class="textbox">${responses[status.index]}</div>
-			    </div>
-			</c:forEach>
+		<div class="mt-28">
+			 <div class="wrap">
+		        <div class="chat ch1" >
+		            <div class="icon"><i class="fa-solid fa-user"></i></div>
+		            <div class="textbox">안녕하세요. 반갑습니다.</div>
+		        </div>
+				<c:forEach items="${userMessages}" var="userMessage" varStatus="status">
+				    <div class="chat ch2">
+				        <div class="icon"><i class="fa-solid fa-user"></i></div>
+				        <div class="textbox">${userMessage}</div>
+				    </div>
+				    <div class="chat ch1">
+				        <div class="icon"><i class="fa-solid fa-user"></i></div>
+				        <div class="textbox">${responses[status.index]}</div>
+				    </div>
+				</c:forEach>
+		    </div>
 	    </div>
-
-
 	</section>    
 </body>
 </html>		

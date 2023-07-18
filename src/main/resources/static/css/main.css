@@ -1,0 +1,82 @@
+* { 
+    box-sizing: border-box; 
+    margin : 0;
+    padding: 0;
+}
+
+a { text-decoration: none;  }
+
+ul {
+    list-style-type: none;
+    height: 48px;
+    width: 100%;
+    background-color: #30426E;
+    display: flex;
+}
+
+ul > li {
+    color: lightgray;
+    height : 100%;
+    width:120px;
+    display:flex;
+    align-items: center;
+}
+
+ul > li > a {
+    color: lightgray;
+    margin:auto;
+    padding: 10px;
+    font-size:20px;
+    align-items: center;
+}
+
+ul > li > a:hover {
+    color :white;
+    border-bottom: 3px solid rgb(209, 209, 209);
+}
+
+#logo {
+	color:white;
+    font-size: 18px;
+    padding-left:40px; 
+    margin-right:auto;
+    display: flex;
+}
+#menu {
+	display: flex;
+	width: 100%;
+	z-index:999;
+}
+
+
+.btn-text-link {
+	color:white;
+}
+
+.btn-text-link:hover {
+	color:olive;
+/* 	text-decoration: underline; */
+}
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html > body {
+	font-family: 'NanumSquareNeo-Variable', sans-serif;
+}
+
+.table-box-type-1 > table {
+	width: 100%;
+}
+
+.table-box-type-1 > table th, .table-box-type-1 > table td {
+	border:2px solid black;
+	padding: 10px;
+	text-align: center;
+}
+
+
+
