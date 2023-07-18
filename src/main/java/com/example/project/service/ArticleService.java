@@ -19,8 +19,11 @@ public class ArticleService {
 		this.articleRepository = articleRepository;
 	}
 	
-	public List<Article> getArticles(int id){
-		return articleRepository.getArticles(id);
+	public List<Article> getArticles(int id, int itemsInAPage, int page){
+		
+		int limitStart = (page - 1) * itemsInAPage;
+		
+		return articleRepository.getArticles(id, itemsInAPage,limitStart);
 	}
 
 	public void writeArticle(String title, int memberId) {
@@ -52,6 +55,10 @@ public class ArticleService {
 		
 		
 		return ResultData.from("S-1", "가능");
+	}
+	
+	public int getArticlesCnt(int memberId) {
+		return articleRepository.getArticlesCnt(memberId);
 	}
 	
 	

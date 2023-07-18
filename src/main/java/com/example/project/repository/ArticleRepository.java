@@ -12,14 +12,15 @@ import com.example.project.vo.Article;
 public interface ArticleRepository {
 
 	@Select("""
-		SELECT A.*, M.name AS writerName 
+		SELECT A.*, M.nickname AS writerName 
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
 			WHERE MemberId = #{id}
 			ORDER BY id DESC
+			LIMIT #{limitStart}, #{itemsInAPage}
 			""")
-	public List<Article> getArticles(int id);
+	public List<Article> getArticles(int id, int itemsInAPage, int limitStart);
 
 	
 	@Select("""
@@ -43,6 +44,13 @@ public interface ArticleRepository {
 				WHERE A.id = #{id}	
 			""")
 	public Article[] getForPrintArticles(int id);
+
+	@Select("""
+			SELECT COUNT(*)
+			FROM article
+			WHERE memberId = #{memberId}
+			""")
+	public int getArticlesCnt(int memberId);
 	
 	
 }

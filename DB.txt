@@ -80,20 +80,25 @@ SELECT * FROM `member`;
 SELECT LAST_INSERT_ID();	
 
 
-			SELECT *
-				FROM `article`
-				ORDER BY id DESC
-				LIMIT 1;
+SELECT *
+    FROM `article`
+    ORDER BY id DESC
+    LIMIT 1;
 				
-		SELECT A.*, M.userMessage,M.response
-				FROM article AS A
-				INNER JOIN `chat` AS M
-				ON A.id = M.articleId
-				WHERE A.id = 5	
+SELECT A.*, M.userMessage,M.response
+		FROM article AS A
+		INNER JOIN `chat` AS M
+		ON A.id = M.articleId
+		WHERE A.id = 5	
 				
-			SELECT A.*, M.name AS writerName 
-			FROM article AS A
-			INNER JOIN `member` AS M
-			ON A.memberId = M.id
-			WHERE memberId = 1
-			ORDER BY id DESC	
+SELECT A.*, M.name AS writerName 
+	FROM article AS A
+	INNER JOIN `member` AS M
+	ON A.memberId = M.id
+	WHERE memberId = 1
+	ORDER BY id DESC
+			
+SELECT userMessage
+	FROM `chat`
+	ORDER BY id DESC
+	LIMIT 3;

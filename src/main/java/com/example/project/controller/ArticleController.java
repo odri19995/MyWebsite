@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project.service.ArticleService;
 import com.example.project.vo.Article;
@@ -32,13 +33,25 @@ public class ArticleController {
 	
 	
 	@GetMapping("/list")
-	public String list(HttpServletRequest request, Model model) {
+	public String list(HttpServletRequest request, Model model,@RequestParam(defaultValue = "1") int page) {
 		int memberId =rq.getLoginedMemberId(); 
 		if(!loginCheck(request))
 			return "redirect:/usr/login";  // 로그인을 안했으면 로그인 화면으로 이동
+		if (page <= 0) {
+			return rq.jsReturnOnView("페이지번호가 올바르지 않습니다", true);
+		}
 		
-		List<Article> articles = articleService.getArticles(memberId);
+		int articlesCnt = articleService.getArticlesCnt(memberId);
 		
+		int itemsInAPage = 10;
+
+		int pagesCount = (int) Math.ceil((double) articlesCnt / itemsInAPage);
+		
+		List<Article> articles = articleService.getArticles(memberId, itemsInAPage, page);
+		
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("page", page);
+		model.addAttribute("articlesCnt", articlesCnt);
 		model.addAttribute("articles", articles);
 		
 		return "usr/article/list"; // 로그인을 한 상태이면, 게시판 화면으로 이동
@@ -61,8 +74,6 @@ public class ArticleController {
 		
 		model.addAttribute("userMessages", userMessages);
 		model.addAttribute("responses", responses);
-		System.out.println(userMessages);
-		System.out.println(responses);
 		
 		return "usr/article/detail";
 	}
