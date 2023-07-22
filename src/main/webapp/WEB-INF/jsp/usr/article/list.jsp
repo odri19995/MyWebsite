@@ -12,7 +12,7 @@
 
 <body>
 <%@ include file="../common/menu.jsp" %>
-	<section class="mt-32 text-xl">
+	<section class="mt-16 text-xl">
 		<div class="container mx-auto px-3">
 			<div class="mb-2 flex justify-start items-end">
 				<div><span>총 : ${articlesCnt } 개</span></div>

@@ -8,7 +8,7 @@
 <body>
 <%@ include file="../common/menu.jsp" %>	
 	<section class="text-xl">
-		<div class="container mx-auto px-3">
+		<div class="container mx-auto px-3 mt-32">
 			<form action="doPasswordModify" method="POST">
 				<div class="table-box-type-1">
 					<table>

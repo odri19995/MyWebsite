@@ -5,6 +5,7 @@
 <%@ include file="../common/head.jsp" %>
 <%@ page import = "java.util.ArrayList" %>
 <link rel="stylesheet" href="/css/chatBot.css">
+<link rel="stylesheet" href="<c:url value='/css/main.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
 <style>
 #menu{
@@ -32,6 +33,11 @@
 				    </div>
 				</c:forEach>
 		    </div>
+		    
+		    <div class="btns mt-2 flex justify-end">
+				<button class="btn-text-link btn btn-active m-4" type="button" onclick="history.back();">뒤로가기</button>
+				<a class="btn-text-link btn btn-active m-4 mr-20" href="doDelete?id=${param.id }" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
+			</div>
 	    </div>
 	</section>    
 </body>

@@ -2,6 +2,7 @@ package com.example.project.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -51,6 +52,19 @@ public interface ArticleRepository {
 			WHERE memberId = #{memberId}
 			""")
 	public int getArticlesCnt(int memberId);
+
+	@Delete("""
+			DELETE FROM article
+			WHERE id = #{id}
+			""")
+	public void deleteArticle(int id);
+
+	@Select("""
+			SELECT * 
+			FROM article
+			WHERE id = #{id}
+			""")
+	public Article getArticleById(int id);
 	
 	
 }

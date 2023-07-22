@@ -60,6 +60,15 @@ public class ArticleService {
 	public int getArticlesCnt(int memberId) {
 		return articleRepository.getArticlesCnt(memberId);
 	}
+
+	public void deleteArticle(int id) {
+		articleRepository.deleteArticle(id);
+		
+	}
+
+	public Article getArticleById(int id) {
+		return articleRepository.getArticleById(id);
+	}
 	
 	
 

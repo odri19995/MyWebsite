@@ -4,12 +4,14 @@
 <c:set var="pageTitle" value="chatBot" />
 <%@ include file="../common/head.jsp" %>
 <link rel="stylesheet" href="/css/chatBot.css">
+<link rel="stylesheet" href="<c:url value='/css/main.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
     <title>Chatbot</title>
 <style>
 #menu{
 	position:fixed;
 }
+
 </style>    
     <script>
         // 챗봇 응답을 생성하는 함수
@@ -78,17 +80,12 @@
 </head>
 <body>
 	<section>
-<%@ include file="../common/menu.jsp" %>		
+<%@ include file="../common/menu.jsp" %>	
 		 <h1 class = "ml-8">GPT와 대화하기</h1>
 		<form action="doWrite" method="POST">
 			<section>
 				<div class = "flex justify-end mr-7">
-					<div class="toast toast-top toast-end mt-20">
-					  <div class="alert alert-info">
-					    <span>대화를 저장할 수 있어요!</span>
-					  </div>
-					</div>
-					<input type="text" placeholder="제목을 입력해 주세요" class="input input-bordered input-primary w-full max-w-xs " />
+					<input type="text" placeholder="제목을 입력해 주세요" name="title"class="input input-bordered input-primary w-full max-w-xs " />
 				</div>
 				<div class = "flex justify-end mr-7 mt-4">
 					<button class="btn btn-neutral">작성</button>

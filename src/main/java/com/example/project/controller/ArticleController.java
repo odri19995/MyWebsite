@@ -14,9 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.project.service.ArticleService;
+import com.example.project.util.Util;
 import com.example.project.vo.Article;
+import com.example.project.vo.ResultData;
 import com.example.project.vo.Rq;
 
 @Controller
@@ -76,6 +79,23 @@ public class ArticleController {
 		model.addAttribute("responses", responses);
 		
 		return "usr/article/detail";
+	}
+	
+	@GetMapping("/doDelete")
+	@ResponseBody
+	public String doDelete(int id) {
+
+		Article article = articleService.getArticleById(id);
+
+		ResultData actorCanModifyRd = articleService.actorCanMD(rq.getLoginedMemberId(), article);
+
+		if (actorCanModifyRd.isFail()) {
+			return Util.jsHistoryBack(actorCanModifyRd.getMsg());
+		}
+
+		articleService.deleteArticle(id);
+
+		return Util.jsReplace(Util.f("%d번 게시물을 삭제했습니다", id), "list");
 	}
 	
 
