@@ -136,7 +136,6 @@ public class OpenAIService {
 	public void passArrays(ArrayList<String> userInputss, ArrayList<String> botResponsess) {
 		botResponses =botResponsess;
 		userInputs = userInputss;
-		System.out.println(userInputs);
 		
 	}
 	

@@ -22,6 +22,13 @@ public interface ArticleRepository {
 			LIMIT #{limitStart}, #{itemsInAPage}
 			""")
 	public List<Article> getArticles(int id, int itemsInAPage, int limitStart);
+	
+	@Select("""
+			SELECT COUNT(*)
+			FROM article
+			WHERE memberId = #{memberId}
+			""")
+	public int getArticlesCnt(int memberId);
 
 	
 	@Select("""
@@ -46,12 +53,7 @@ public interface ArticleRepository {
 			""")
 	public Article[] getForPrintArticles(int id);
 
-	@Select("""
-			SELECT COUNT(*)
-			FROM article
-			WHERE memberId = #{memberId}
-			""")
-	public int getArticlesCnt(int memberId);
+
 
 	@Delete("""
 			DELETE FROM article
